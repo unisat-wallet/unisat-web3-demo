@@ -61,6 +61,8 @@ function App() {
     const unisat = (window as any).unisat;
     if (unisat) {
       setUnisatInstalled(true);
+    } else {
+      return;
     }
     unisat.getAccounts().then((accounts: string[]) => {
       handleAccountsChanged(accounts);

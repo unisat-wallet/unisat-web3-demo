@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Button, Card, Input, Radio } from "antd";
-var unisat = (window as any).unisat;
 
 function App() {
+  const [unisat, setUnisat] = useState<any>(null);
   const [connected, setConnected] = useState(false);
   const [accounts, setAccounts] = useState<string[]>([]);
   const [publicKey, setPublicKey] = useState("");
@@ -57,9 +57,8 @@ function App() {
   };
 
   useEffect(() => {
-    if (!unisat) {
-      return;
-    }
+    const unisat = (window as any).unisat;
+    setUnisat(unisat);
 
     unisat.getAccounts().then((accounts: string[]) => {
       handleAccountsChanged(accounts);
@@ -81,7 +80,8 @@ function App() {
           <div>
             <Button
               onClick={() => {
-                window.location.href = "https://unisat.io";
+                console.log((window as any).unisat);
+                // window.location.href = "https://unisat.io";
               }}
             >
               Install Unisat Wallet
@@ -191,7 +191,7 @@ function SignPsbtCard() {
         style={{ marginTop: 10 }}
         onClick={async () => {
           try {
-            const psbtResult = await unisat.signPsbt(psbtHex);
+            const psbtResult = await (window as any).unisat.signPsbt(psbtHex);
             setPsbtResult(psbtResult);
           } catch (e) {
             setPsbtResult((e as any).message);
@@ -225,7 +225,7 @@ function SignMessageCard() {
       <Button
         style={{ marginTop: 10 }}
         onClick={async () => {
-          const signature = await unisat.signMessage(message);
+          const signature = await (window as any).unisat.signMessage(message);
           setSignature(signature);
         }}
       >
@@ -261,7 +261,7 @@ function PushTxCard() {
         style={{ marginTop: 10 }}
         onClick={async () => {
           try {
-            const txid = await unisat.pushTx(rawtx);
+            const txid = await (window as any).unisat.pushTx(rawtx);
             setTxid(txid);
           } catch (e) {
             setTxid((e as any).message);
@@ -296,7 +296,7 @@ function PushPsbtCard() {
         style={{ marginTop: 10 }}
         onClick={async () => {
           try {
-            const txid = await unisat.pushPsbt(psbtHex);
+            const txid = await (window as any).unisat.pushPsbt(psbtHex);
             setTxid(txid);
           } catch (e) {
             setTxid((e as any).message);
@@ -344,7 +344,10 @@ function SendBitcoin() {
         style={{ marginTop: 10 }}
         onClick={async () => {
           try {
-            const txid = await unisat.sendBitcoin(toAddress, satoshis);
+            const txid = await (window as any).unisat.sendBitcoin(
+              toAddress,
+              satoshis
+            );
             setTxid(txid);
           } catch (e) {
             setTxid((e as any).message);

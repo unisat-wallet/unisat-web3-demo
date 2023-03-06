@@ -3,7 +3,7 @@ import "./App.css";
 import { Button, Card, Input, Radio } from "antd";
 
 function App() {
-  const [unisat, setUnisat] = useState<any>(null);
+  const [unisatInstalled, setUnisatInstalled] = useState(false);
   const [connected, setConnected] = useState(false);
   const [accounts, setAccounts] = useState<string[]>([]);
   const [publicKey, setPublicKey] = useState("");
@@ -16,6 +16,7 @@ function App() {
   const [network, setNetwork] = useState("livenet");
 
   const getBasicInfo = async () => {
+    const unisat = (window as any).unisat;
     const [address] = await unisat.getAccounts();
     setAddress(address);
 
@@ -58,8 +59,9 @@ function App() {
 
   useEffect(() => {
     const unisat = (window as any).unisat;
-    setUnisat(unisat);
-
+    if (unisat) {
+      setUnisatInstalled(true);
+    }
     unisat.getAccounts().then((accounts: string[]) => {
       handleAccountsChanged(accounts);
     });
@@ -73,15 +75,14 @@ function App() {
     };
   }, []);
 
-  if (!unisat) {
+  if (!unisatInstalled) {
     return (
       <div className="App">
         <header className="App-header">
           <div>
             <Button
               onClick={() => {
-                console.log((window as any).unisat);
-                // window.location.href = "https://unisat.io";
+                window.location.href = "https://unisat.io";
               }}
             >
               Install Unisat Wallet
@@ -91,7 +92,7 @@ function App() {
       </div>
     );
   }
-
+  const unisat = (window as any).unisat;
   return (
     <div className="App">
       <header className="App-header">

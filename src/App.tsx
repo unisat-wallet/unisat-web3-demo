@@ -16,7 +16,7 @@ function App() {
   const [network, setNetwork] = useState("livenet");
 
   const getBasicInfo = async () => {
-    const address = await unisat.getAddress();
+    const [address] = await unisat.getAccounts();
     setAddress(address);
 
     const publicKey = await unisat.getPublicKey();
@@ -60,6 +60,10 @@ function App() {
     if (!unisat) {
       return;
     }
+
+    unisat.getAccounts().then((accounts: string[]) => {
+      handleAccountsChanged(accounts);
+    });
 
     unisat.on("accountsChanged", handleAccountsChanged);
     unisat.on("networkChanged", handleNetworkChanged);

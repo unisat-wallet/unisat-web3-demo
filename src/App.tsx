@@ -58,23 +58,34 @@ function App() {
   };
 
   useEffect(() => {
-    const unisat = (window as any).unisat;
-    if (unisat) {
-      setUnisatInstalled(true);
-    } else {
-      return;
+
+    async function checkUnisat() {
+      let unisat = (window as any).unisat;
+
+      for (let i = 1; i < 10 && !unisat; i += 1) {
+          await new Promise((resolve) => setTimeout(resolve, 100*i));
+          unisat = (window as any).unisat;
+      }
+
+      if(unisat){
+          setUnisatInstalled(true);
+      }else if (!unisat)
+          return;
+
+      unisat.getAccounts().then((accounts: string[]) => {
+          handleAccountsChanged(accounts);
+      });
+
+      unisat.on("accountsChanged", handleAccountsChanged);
+      unisat.on("networkChanged", handleNetworkChanged);
+
+      return () => {
+          unisat.removeListener("accountsChanged", handleAccountsChanged);
+          unisat.removeListener("networkChanged", handleNetworkChanged);
+      };
     }
-    unisat.getAccounts().then((accounts: string[]) => {
-      handleAccountsChanged(accounts);
-    });
 
-    unisat.on("accountsChanged", handleAccountsChanged);
-    unisat.on("networkChanged", handleNetworkChanged);
-
-    return () => {
-      unisat.removeListener("accountsChanged", handleAccountsChanged);
-      unisat.removeListener("networkChanged", handleNetworkChanged);
-    };
+    checkUnisat().then();
   }, []);
 
   if (!unisatInstalled) {

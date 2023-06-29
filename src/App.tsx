@@ -58,37 +58,35 @@ function App() {
   };
 
   useEffect(() => {
-
-    async function checkUnisat() {
-      let unisat = (window as any).unisat;
-
-      for (let i = 1; i < 10 && !unisat; i += 1) {
-          await new Promise((resolve) => setTimeout(resolve, 100*i));
-          unisat = (window as any).unisat;
-      }
-
-      if(unisat){
-          setUnisatInstalled(true);
-      }else if (!unisat)
-          return;
-
-      unisat.getAccounts().then((accounts: string[]) => {
+    const checkUnisat = () => {
+      const { unisat } = window as any;
+      if (unisat) {
+        setUnisatInstalled(true);
+        unisat.getAccounts().then((accounts: string[]) => {
           handleAccountsChanged(accounts);
-      });
+        });
+        unisat.on("accountsChanged", handleAccountsChanged);
+        unisat.on("networkChanged", handleNetworkChanged);
+      }
+    };
 
-      unisat.on("accountsChanged", handleAccountsChanged);
-      unisat.on("networkChanged", handleNetworkChanged);
-
-      return () => {
-          unisat.removeListener("accountsChanged", handleAccountsChanged);
-          unisat.removeListener("networkChanged", handleNetworkChanged);
-      };
+    if (document.readyState === 'complete') {
+      checkUnisat();
+    } else {
+      window.addEventListener('load', checkUnisat);
     }
 
-    checkUnisat().then();
+    return () => {
+      const { unisat } = window as any;
+      if (unisat) {
+        unisat.removeListener("accountsChanged", handleAccountsChanged);
+        unisat.removeListener("networkChanged", handleNetworkChanged);
+      }
+      window.removeEventListener('load', checkUnisat);
+    };
   }, []);
 
-  if (!unisatInstalled) {
+  if (document.readyState === 'complete'&&!unisatInstalled) {
     return (
       <div className="App">
         <header className="App-header">

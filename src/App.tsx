@@ -37,24 +37,56 @@ function App() {
 
   const getBasicInfo = async () => {
     const unisat = (window as any).unisat;
-    const [address] = await unisat.getAccounts();
-    setAddress(address);
 
-    const publicKey = await unisat.getPublicKey();
-    setPublicKey(publicKey);
+    try {
+      const accounts = await unisat.getAccounts();
+      setAccounts(accounts);
+    } catch (e) {
+      console.log("getAccounts error", e);
+    }
 
-    const balance = await unisat.getBalance();
-    setBalance(balance);
+    try {
+      const publicKey = await unisat.getPublicKey();
+      setPublicKey(publicKey);
+    } catch (e) {
+      console.log("getPublicKey error", e);
+    }
 
-    const network = await unisat.getNetwork();
-    setNetwork(network);
+    try {
+      const balance = await unisat.getBalance();
+      setBalance(balance);
+    } catch (e) {
+      console.log("getBalance error", e);
+    }
 
-    const version = await unisat.getVersion();
-    setVersion(version);
-
-    if (unisat.getChain !== undefined) {
+    try {
       const chain = await unisat.getChain();
       setChainType(chain.enum);
+    } catch (e) {
+      console.log("getChain error", e);
+    }
+
+    try {
+      const network = await unisat.getNetwork();
+      setNetwork(network);
+    } catch (e) {
+      console.log("getNetwork error", e);
+    }
+
+    try {
+      const version = await unisat.getVersion();
+      setVersion(version);
+    } catch (e) {
+      console.log("getVersion error ", e);
+    }
+
+    if (unisat.getChain !== undefined) {
+      try {
+        const chain = await unisat.getChain();
+        setChainType(chain.enum);
+      } catch (e) {
+        console.log("getChain error", e);
+      }
     }
   };
 
@@ -110,10 +142,15 @@ function App() {
         setUnisatInstalled(true);
       } else if (!unisat) return;
 
-      unisat.getAccounts().then((accounts: string[]) => {
-        // 主动获取一次账户信息
-        handleAccountsChanged(accounts);
-      });
+      unisat
+        .getAccounts()
+        .then((accounts: string[]) => {
+          // 主动获取一次账户信息
+          handleAccountsChanged(accounts);
+        })
+        .catch((e: any) => {
+          messageApi.error((e as any).message);
+        });
 
       unisat.on("accountsChanged", handleAccountsChanged);
       unisat.on("networkChanged", handleNetworkChanged);
@@ -196,6 +233,15 @@ function App() {
     },
   ];
 
+  const chains = Object.keys(CHAINS_MAP).map((key) => {
+    const chain = CHAINS_MAP[key as ChainType];
+    return {
+      label: chain.label,
+      value: chain.enum,
+    };
+  });
+
+  const supportLegacyNetworks = ["livenet", "testnet"];
   return (
     <div className="App">
       <header className="App-header">
@@ -269,26 +315,16 @@ function App() {
                       }}
                       value={chain.enum}
                     >
-                      <Radio value={ChainType.BITCOIN_MAINNET}>
-                        Bitcoin Mainnet
-                      </Radio>
-                      <Radio value={ChainType.BITCOIN_TESTNET}>
-                        Bitcoin Testnet
-                      </Radio>
-                      <Radio value={ChainType.BITCOIN_TESTNET4}>
-                        Bitcoin Testnet4
-                      </Radio>
-                      <Radio value={ChainType.BITCOIN_SIGNET}>
-                        Bitcoin Signet
-                      </Radio>
-                      <Radio value={ChainType.FRACTAL_BITCOIN_MAINNET}>
-                        Fractal Bitcoin (Beta)
-                      </Radio>
+                      {chains.map((chain) => (
+                        <Radio value={chain.value}>{chain.label}</Radio>
+                      ))}
                     </Radio.Group>
                   </div>
-                ) : (
-                  <div style={{ textAlign: "left", marginTop: 10 }}>
-                    <div style={{ fontWeight: "bold" }}>Network:</div>
+                ) : null}
+
+                <div style={{ textAlign: "left", marginTop: 10 }}>
+                  <div style={{ fontWeight: "bold" }}>Network:</div>
+                  {supportLegacyNetworks.includes(network) ? (
                     <Radio.Group
                       onChange={async (e) => {
                         try {
@@ -305,23 +341,14 @@ function App() {
                       <Radio value={"livenet"}>livenet</Radio>
                       <Radio value={"testnet"}>testnet</Radio>
                     </Radio.Group>
-                  </div>
-                )}
-
-                <div style={{ textAlign: "left", marginTop: 10 }}>
-                  <div style={{ fontWeight: "bold" }}>Network:</div>
-                  <Radio.Group
-                    onChange={async (e) => {
-                      const network = await unisat.switchNetwork(
-                        e.target.value
-                      );
-                      setNetwork(network);
-                    }}
-                    value={network}
-                  >
-                    <Radio value={"livenet"}>livenet</Radio>
-                    <Radio value={"testnet"}>testnet</Radio>
-                  </Radio.Group>
+                  ) : (
+                    <div>
+                      <p>
+                        "unisat.getNetwork" is legacy. Please use
+                        "unisat.getChain" instead.{" "}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </Card>
               <Card
@@ -358,7 +385,7 @@ function App() {
                 <div style={{ textAlign: "left", marginTop: 10 }}>
                   <div style={{ fontWeight: "bold" }}>Balance: </div>
                   <div style={{ wordWrap: "break-word" }}>
-                    {satoshisToAmount(balance.total)} {chain.unit}
+                    {satoshisToAmount(balance.total)} {chain && chain.unit}
                   </div>
                 </div>
               </Card>

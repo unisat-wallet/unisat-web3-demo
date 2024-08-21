@@ -4,6 +4,7 @@ export enum ChainType {
   BITCOIN_TESTNET4 = "BITCOIN_TESTNET4",
   BITCOIN_SIGNET = "BITCOIN_SIGNET",
   FRACTAL_BITCOIN_MAINNET = "FRACTAL_BITCOIN_MAINNET",
+  FRACTAL_BITCOIN_TESTNET = "FRACTAL_BITCOIN_TESTNET",
 }
 
 export enum NetworkType {
@@ -70,7 +71,7 @@ export const CHAINS_MAP: { [key: string]: TypeChain } = {
   },
   [ChainType.FRACTAL_BITCOIN_MAINNET]: {
     enum: ChainType.FRACTAL_BITCOIN_MAINNET,
-    label: "Fractal Bitcoin (Beta)",
+    label: "Fractal Bitcoin Mainnet",
     icon: "./images/artifacts/fractalbitcoin-mainnet.png",
     unit: "FB",
     networkType: NetworkType.MAINNET,
@@ -78,5 +79,16 @@ export const CHAINS_MAP: { [key: string]: TypeChain } = {
     mempoolSpaceUrl: "https://mempool.fractalbitcoin.io",
     unisatUrl: "https://fractal.unisat.io",
     ordinalsUrl: "https://ordinals.fractalbitcoin.io",
+  },
+  [ChainType.FRACTAL_BITCOIN_TESTNET]: {
+    enum: ChainType.FRACTAL_BITCOIN_TESTNET,
+    label: "Fractal Bitcoin Testnet",
+    icon: "./images/artifacts/fractalbitcoin-mainnet.png",
+    unit: "tFB",
+    networkType: NetworkType.MAINNET,
+    endpoints: ["https://wallet-api-fractal.unisat.io/testnet"],
+    mempoolSpaceUrl: "https://mempool-testnet.fractalbitcoin.io",
+    unisatUrl: "https://fractal-testnet.unisat.io",
+    ordinalsUrl: "https://ordinals-testnet.fractalbitcoin.io",
   },
 };

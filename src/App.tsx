@@ -1,33 +1,40 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./App.css";
-import { Button, Card, CollapseProps, Input, Radio, message } from "antd";
-import { CHAINS_MAP, ChainType } from "./const";
-import { copyToClipboard, satoshisToAmount } from "./utils";
-import { SendBitcoinCard } from "./components/SendBitcoinCard";
-import { PushPsbtCard } from "./components/PushPsbtCard";
-import { PushTxCard } from "./components/PushTxCard";
-import { SignMessageCard } from "./components/SignMessageCard";
-import { SignPsbtCard } from "./components/SignPsbtCard";
-import { Collapse } from "antd";
-import { InscribeTransferCard } from "./components/InscribeTransferCard";
-import { SendInscriptionCard } from "./components/SendInscriptionCard";
-import { SendRunesCard } from "./components/SendRunesCard";
-import useMessage from "antd/es/message/useMessage";
+import React, { useEffect, useRef, useState } from 'react';
+import './App.css';
+import { Button, Card, CollapseProps, Input, Radio, message } from 'antd';
+import { CHAINS_MAP, ChainType } from './const';
+import { copyToClipboard, satoshisToAmount } from './utils';
+import { SendBitcoinCard } from './components/SendBitcoinCard';
+import { PushPsbtCard } from './components/PushPsbtCard';
+import { PushTxCard } from './components/PushTxCard';
+import { SignMessageCard } from './components/SignMessageCard';
+import { SignPsbtCard } from './components/SignPsbtCard';
+import { Collapse } from 'antd';
+import { InscribeTransferCard } from './components/InscribeTransferCard';
+import { SendInscriptionCard } from './components/SendInscriptionCard';
+import { SendRunesCard } from './components/SendRunesCard';
+import { MultiSignMessageCard } from './components/MultiSignMessageCard';
+import { SignPsbtsCard } from './components/SignPsbtsCard';
+import useMessage from 'antd/es/message/useMessage';
 
 function App() {
   const [unisatInstalled, setUnisatInstalled] = useState(false);
   const [connected, setConnected] = useState(false);
   const [accounts, setAccounts] = useState<string[]>([]);
-  const [publicKey, setPublicKey] = useState("");
-  const [address, setAddress] = useState("");
+  const [publicKey, setPublicKey] = useState('');
+  const [address, setAddress] = useState('');
   const [balance, setBalance] = useState({
     confirmed: 0,
     unconfirmed: 0,
     total: 0,
   });
-  const [network, setNetwork] = useState("livenet");
+  const [balanceV2, setBalanceV2] = useState({
+    available: 0,
+    unavailable: 0,
+    total: 0,
+  });
+  const [network, setNetwork] = useState('livenet');
 
-  const [version, setVersion] = useState("");
+  const [version, setVersion] = useState('');
 
   const [chainType, setChainType] = useState<ChainType>(
     ChainType.BITCOIN_MAINNET
@@ -42,42 +49,50 @@ function App() {
       const accounts = await unisat.getAccounts();
       setAccounts(accounts);
     } catch (e) {
-      console.log("getAccounts error", e);
+      console.log('getAccounts error', e);
     }
 
     try {
       const publicKey = await unisat.getPublicKey();
       setPublicKey(publicKey);
     } catch (e) {
-      console.log("getPublicKey error", e);
+      console.log('getPublicKey error', e);
     }
 
     try {
       const balance = await unisat.getBalance();
       setBalance(balance);
     } catch (e) {
-      console.log("getBalance error", e);
+      console.log('getBalance error', e);
+    }
+
+    try {
+      const balanceV2 = await unisat.getBalanceV2();
+      setBalanceV2(balanceV2);
+      console.log('BalanceV2:', balanceV2);
+    } catch (e) {
+      console.log('getBalanceV2 error', e);
     }
 
     try {
       const chain = await unisat.getChain();
       setChainType(chain.enum);
     } catch (e) {
-      console.log("getChain error", e);
+      console.log('getChain error', e);
     }
 
     try {
       const network = await unisat.getNetwork();
       setNetwork(network);
     } catch (e) {
-      console.log("getNetwork error", e);
+      console.log('getNetwork error', e);
     }
 
     try {
       const version = await unisat.getVersion();
       setVersion(version);
     } catch (e) {
-      console.log("getVersion error ", e);
+      console.log('getVersion error ', e);
     }
 
     if (unisat.getChain !== undefined) {
@@ -85,7 +100,7 @@ function App() {
         const chain = await unisat.getChain();
         setChainType(chain.enum);
       } catch (e) {
-        console.log("getChain error", e);
+        console.log('getChain error', e);
       }
     }
   };
@@ -95,7 +110,7 @@ function App() {
   });
   const self = selfRef.current;
   const handleAccountsChanged = (_accounts: string[]) => {
-    console.log("accounts changed", _accounts);
+    console.log('accounts changed', _accounts);
     if (self.accounts[0] === _accounts[0]) {
       // prevent from triggering twice
       return;
@@ -114,7 +129,7 @@ function App() {
   };
 
   const handleNetworkChanged = (network: string) => {
-    console.log("network changed", network);
+    console.log('network changed', network);
     setNetwork(network);
     getBasicInfo();
   };
@@ -124,7 +139,7 @@ function App() {
     name: string;
     network: string;
   }) => {
-    console.log("chain changed", chain);
+    console.log('chain changed', chain);
     setChainType(chain.enum);
     getBasicInfo();
   };
@@ -152,14 +167,14 @@ function App() {
           messageApi.error((e as any).message);
         });
 
-      unisat.on("accountsChanged", handleAccountsChanged);
-      unisat.on("networkChanged", handleNetworkChanged);
-      unisat.on("chainChanged", handleChainChanged);
+      unisat.on('accountsChanged', handleAccountsChanged);
+      unisat.on('networkChanged', handleNetworkChanged);
+      unisat.on('chainChanged', handleChainChanged);
 
       return () => {
-        unisat.removeListener("accountsChanged", handleAccountsChanged);
-        unisat.removeListener("networkChanged", handleNetworkChanged);
-        unisat.removeListener("chainChanged", handleChainChanged);
+        unisat.removeListener('accountsChanged', handleAccountsChanged);
+        unisat.removeListener('networkChanged', handleNetworkChanged);
+        unisat.removeListener('chainChanged', handleChainChanged);
       };
     }
 
@@ -176,7 +191,7 @@ function App() {
           <div>
             <Button
               onClick={() => {
-                window.location.href = "https://unisat.io";
+                window.location.href = 'https://unisat.io';
               }}
             >
               Install Unisat Wallet
@@ -189,46 +204,55 @@ function App() {
 
   const unisat = (window as any).unisat;
 
-  const items: CollapseProps["items"] = [
+  const items: CollapseProps['items'] = [
     {
-      key: "sendBitcoin",
-      label: <div style={{ textAlign: "start" }}>unisat.sendBitcoin</div>,
+      key: 'sendBitcoin',
+      label: <div style={{ textAlign: 'start' }}>unisat.sendBitcoin</div>,
       children: <SendBitcoinCard />,
     },
     {
-      key: "sendInscription",
-      label: <div style={{ textAlign: "start" }}>unisat.sendInscription</div>,
+      key: 'sendInscription',
+      label: <div style={{ textAlign: 'start' }}>unisat.sendInscription</div>,
       children: <SendInscriptionCard />,
     },
-
     {
-      key: "sendRunes",
-      label: <div style={{ textAlign: "start" }}>unisat.sendRunes</div>,
+      key: 'sendRunes',
+      label: <div style={{ textAlign: 'start' }}>unisat.sendRunes</div>,
       children: <SendRunesCard />,
     },
     {
-      key: "inscribeTransfer",
-      label: <div style={{ textAlign: "start" }}>unisat.inscribeTransfer</div>,
+      key: 'inscribeTransfer',
+      label: <div style={{ textAlign: 'start' }}>unisat.inscribeTransfer</div>,
       children: <InscribeTransferCard />,
     },
     {
-      key: "signMessage",
-      label: <div style={{ textAlign: "start" }}>unisat.signMessage</div>,
+      key: 'signMessage',
+      label: <div style={{ textAlign: 'start' }}>unisat.signMessage</div>,
       children: <SignMessageCard />,
     },
     {
-      key: "signPsbt",
-      label: <div style={{ textAlign: "start" }}>unisat.signPsbt</div>,
+      key: 'multiSignMessage',
+      label: <div style={{ textAlign: 'start' }}>unisat.multiSignMessage</div>,
+      children: <MultiSignMessageCard />,
+    },
+    {
+      key: 'signPsbt',
+      label: <div style={{ textAlign: 'start' }}>unisat.signPsbt</div>,
       children: <SignPsbtCard />,
     },
     {
-      key: "pushPsbt",
-      label: <div style={{ textAlign: "start" }}>unisat.signPsbt</div>,
+      key: 'signPsbts',
+      label: <div style={{ textAlign: 'start' }}>unisat.signPsbts</div>,
+      children: <SignPsbtsCard />,
+    },
+    {
+      key: 'pushPsbt',
+      label: <div style={{ textAlign: 'start' }}>unisat.pushPsbt</div>,
       children: <PushPsbtCard />,
     },
     {
-      key: "pushTx",
-      label: <div style={{ textAlign: "start" }}>unisat.pushTx</div>,
+      key: 'pushTx',
+      label: <div style={{ textAlign: 'start' }}>unisat.pushTx</div>,
       children: <PushTxCard />,
     },
   ];
@@ -241,23 +265,14 @@ function App() {
     };
   });
 
-  const supportLegacyNetworks = ["livenet", "testnet"];
+  const supportLegacyNetworks = ['livenet', 'testnet'];
   return (
     <div className="App">
       <header className="App-header">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "90%",
-            alignSelf: "center",
-          }}
-        >
-          <div style={{ minWidth: 200 }}> </div>
+        <div className="header-container">
+          <div style={{ minWidth: 100 }}> </div>
           <p>Unisat Wallet Demo</p>
-          <div style={{ minWidth: 200 }}>
+          <div style={{ minWidth: 100 }}>
             {connected ? (
               <Button
                 onClick={async () => {
@@ -272,36 +287,17 @@ function App() {
 
         {contextHolder}
         {connected ? (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: 10,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flex: 1,
-                flexDirection: "row",
-                width: "90%",
-                padding: 10,
-              }}
-            >
-              <Card
-                size="small"
-                title="Wallet Info"
-                style={{ width: "100%", marginRight: 5 }}
-              >
-                <div style={{ textAlign: "left", marginTop: 10 }}>
-                  <div style={{ fontWeight: "bold" }}>Version:</div>
-                  <div style={{ wordWrap: "break-word" }}>{version}</div>
+          <div className="wallet-info-container">
+            <div className="info-cards-container">
+              <Card size="small" title="Wallet Info" style={{ flex: 1 }}>
+                <div style={{ textAlign: 'left', marginTop: 10 }}>
+                  <div style={{ fontWeight: 'bold' }}>Version:</div>
+                  <div style={{ wordWrap: 'break-word' }}>{version}</div>
                 </div>
 
                 {chain ? (
-                  <div style={{ textAlign: "left", marginTop: 10 }}>
-                    <div style={{ fontWeight: "bold" }}>Chain:</div>
+                  <div style={{ textAlign: 'left', marginTop: 10 }}>
+                    <div style={{ fontWeight: 'bold' }}>Chain:</div>
                     <Radio.Group
                       onChange={async (e) => {
                         try {
@@ -316,14 +312,16 @@ function App() {
                       value={chain.enum}
                     >
                       {chains.map((chain) => (
-                        <Radio value={chain.value}>{chain.label}</Radio>
+                        <Radio key={chain.value} value={chain.value}>
+                          {chain.label}
+                        </Radio>
                       ))}
                     </Radio.Group>
                   </div>
                 ) : null}
 
-                <div style={{ textAlign: "left", marginTop: 10 }}>
-                  <div style={{ fontWeight: "bold" }}>Network:</div>
+                <div style={{ textAlign: 'left', marginTop: 10 }}>
+                  <div style={{ fontWeight: 'bold' }}>Network:</div>
                   {supportLegacyNetworks.includes(network) ? (
                     <Radio.Group
                       onChange={async (e) => {
@@ -338,64 +336,68 @@ function App() {
                       }}
                       value={network}
                     >
-                      <Radio value={"livenet"}>livenet</Radio>
-                      <Radio value={"testnet"}>testnet</Radio>
+                      <Radio value={'livenet'}>livenet</Radio>
+                      <Radio value={'testnet'}>testnet</Radio>
                     </Radio.Group>
                   ) : (
                     <div>
                       <p>
                         "unisat.getNetwork" is legacy. Please use
-                        "unisat.getChain" instead.{" "}
+                        "unisat.getChain" instead.{' '}
                       </p>
                     </div>
                   )}
                 </div>
               </Card>
-              <Card
-                size="small"
-                title="Account Info"
-                style={{ width: "100%", marginLeft: 5 }}
-              >
-                <div style={{ textAlign: "left", marginTop: 10 }}>
-                  <div style={{ fontWeight: "bold" }}>Address:</div>
+              <Card size="small" title="Account Info" style={{ flex: 1 }}>
+                <div style={{ textAlign: 'left', marginTop: 10 }}>
+                  <div style={{ fontWeight: 'bold' }}>Address:</div>
                   <div
-                    style={{ wordWrap: "break-word" }}
+                    style={{ wordWrap: 'break-word' }}
                     onClick={() => {
                       copyToClipboard(address);
-                      messageApi.success("Address Copied.");
+                      messageApi.success('Address Copied.');
                     }}
                   >
                     {address}
                   </div>
                 </div>
 
-                <div style={{ textAlign: "left", marginTop: 10 }}>
-                  <div style={{ fontWeight: "bold" }}>PublicKey:</div>
+                <div style={{ textAlign: 'left', marginTop: 10 }}>
+                  <div style={{ fontWeight: 'bold' }}>PublicKey:</div>
                   <div
-                    style={{ wordWrap: "break-word" }}
+                    style={{ wordWrap: 'break-word' }}
                     onClick={() => {
                       copyToClipboard(publicKey);
-                      messageApi.success("PublicKey Copied.");
+                      messageApi.success('PublicKey Copied.');
                     }}
                   >
                     {publicKey}
                   </div>
                 </div>
 
-                <div style={{ textAlign: "left", marginTop: 10 }}>
-                  <div style={{ fontWeight: "bold" }}>Balance: </div>
-                  <div style={{ wordWrap: "break-word" }}>
-                    {satoshisToAmount(balance.total)} {chain && chain.unit}
+                <div style={{ textAlign: 'left', marginTop: 10 }}>
+                  <div style={{ fontWeight: 'bold' }}>Balance </div>
+                  <div style={{ wordWrap: 'break-word' }}>
+                    <div>
+                      Available: {satoshisToAmount(balanceV2.available)}{' '}
+                      {chain && chain.unit}
+                    </div>
+                    <div>
+                      Unavailable: {satoshisToAmount(balanceV2.unavailable)}{' '}
+                      {chain && chain.unit}
+                    </div>
+                    <div>
+                      Total: {satoshisToAmount(balanceV2.total)}{' '}
+                      {chain && chain.unit}
+                    </div>
                   </div>
                 </div>
               </Card>
             </div>
 
             <Collapse
-              style={{
-                backgroundColor: "rgba(255,255,255,0.7)",
-                width: "90%",
-              }}
+              className="collapse-container"
               items={items}
               defaultActiveKey={[]}
               onChange={() => {

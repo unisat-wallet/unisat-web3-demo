@@ -11,3 +11,53 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.ant-card-body {
+  padding: 16px;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.ant-collapse-content-box {
+  padding: 8px !important;
+}
+
+@media (max-width: 576px) {
+  .ant-card-body {
+    padding: 12px;
+  }
+
+  .ant-card-head-title {
+    font-size: 14px;
+  }
+
+  .ant-collapse-header {
+    padding: 8px 16px !important;
+  }
+
+  .message-type-selector .ant-space {
+    margin-top: 8px;
+  }
+}
+
+.ant-input,
+.ant-input-textarea,
+pre,
+code {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+a {
+  word-break: break-all;
+}
+
+.ant-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ant-radio-wrapper {
+  margin-right: 0 !important;
+}

@@ -60,6 +60,21 @@
   width: 100%;
 }
 
+.demos-container {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.demos-container .ant-tabs-nav {
+  margin-bottom: 16px;
+}
+
+.demos-container .ant-collapse {
+  background-color: transparent;
+}
+
 .function-card {
   margin: 10px;
   transition: all 0.3s;

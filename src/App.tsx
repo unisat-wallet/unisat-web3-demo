@@ -111,11 +111,6 @@ function App() {
             header={
               <div style={{ textAlign: 'start' }}>
                 {demo.config.apiMethod || demo.config.title}
-                {demo.config.walletConnectSupported && (
-                  <span style={{ marginLeft: 8, fontSize: 11, color: '#52c41a' }}>
-                    [wallet-connect]
-                  </span>
-                )}
               </div>
             }
           >

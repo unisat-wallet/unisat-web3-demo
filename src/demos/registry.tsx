@@ -23,6 +23,7 @@ import { PushTxDemo, pushTxConfig } from './broadcast/PushTxDemo';
 
 // Advanced demos
 import { MultiSignMessageDemo, multiSignMessageConfig } from './advanced/MultiSignMessageDemo';
+import { DeriveContextHashDemo, deriveContextHashConfig } from './advanced/DeriveContextHashDemo';
 
 /**
  * Demo entry with config and component
@@ -57,6 +58,7 @@ export const DEMOS: DemoEntry[] = [
 
   // Advanced
   { config: multiSignMessageConfig, component: MultiSignMessageDemo },
+  { config: deriveContextHashConfig, component: DeriveContextHashDemo },
 ];
 
 /**

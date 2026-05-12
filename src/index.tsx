@@ -6,14 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import {
   WalletProvider,
   UniSatWallet,
-  OkxWallet,
   ChainTypeEnum,
 } from '@unisat/wallet-connect-react';
 import { SelectWalletModal } from './components/SelectWalletModal';
 import { message } from 'antd';
 
 // Create wallet instances
-const wallets = [new UniSatWallet(), new OkxWallet()];
+const wallets = [new UniSatWallet()];
 
 // Simple notifier using antd message
 const notifier = {

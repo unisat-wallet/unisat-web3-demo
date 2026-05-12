@@ -9,7 +9,7 @@ export const sendInscriptionConfig: DemoConfig = {
   title: 'Send Inscription',
   category: 'transaction',
   apiMethod: 'unisat.sendInscription',
-  docUrl: 'https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#sendinscription',
+  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/manage-assets.md#sendinscription',
   description: 'Transfer an inscription to another address.',
   walletConnectSupported: false,
 };

@@ -10,7 +10,7 @@ export const signPsbtConfig: DemoConfig = {
   title: 'Sign PSBT',
   category: 'signing',
   apiMethod: 'unisat.signPsbt',
-  docUrl: 'https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#signpsbt',
+  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-transaction.md#signpsbt',
   description: 'Sign a Partially Signed Bitcoin Transaction (PSBT).',
   walletConnectSupported: true,
 };

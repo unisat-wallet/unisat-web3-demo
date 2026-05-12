@@ -54,7 +54,7 @@ export function MultiSignMessageCard() {
   };
 
   const doc_url =
-    'https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#multisignmessage';
+    'https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-message.md#multisignmessage';
 
   return (
     <Card size="small" title="Multi Sign Messages" className="function-card">

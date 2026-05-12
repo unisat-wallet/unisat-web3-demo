@@ -9,7 +9,7 @@ export const inscribeTransferConfig: DemoConfig = {
   title: 'Inscribe Transfer',
   category: 'transaction',
   apiMethod: 'unisat.inscribeTransfer',
-  docUrl: 'https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#inscribetransfer',
+  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/manage-assets.md#inscribetransfer',
   description: 'Inscribe a BRC-20 transfer inscription.',
   walletConnectSupported: false,
 };

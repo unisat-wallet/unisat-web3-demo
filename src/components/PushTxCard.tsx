@@ -10,7 +10,7 @@ export function PushTxCard() {
   });
 
   const doc_url =
-    "https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#pushtx";
+    "https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-transaction.md#pushtx";
 
   return (
     <Card size="small" title="Push Transaction Hex" style={{ margin: 10 }}>

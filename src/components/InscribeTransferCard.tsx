@@ -10,7 +10,7 @@ export function InscribeTransferCard() {
   });
 
   const doc_url =
-    "https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#pushtx";
+    "https://github.com/unisat-wallet/wallet/blob/master/docs/api/manage-assets.md#inscribetransfer";
 
   return (
     <Card size="small" title="InscribeTransfer" style={{ margin: 10 }}>

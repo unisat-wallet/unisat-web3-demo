@@ -58,7 +58,7 @@ export function SignPsbtsCard() {
   };
 
   const doc_url =
-    'https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#signpsbts';
+    'https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-transaction.md#signpsbts';
 
   return (
     <Card size="small" title="Sign Multiple PSBTs" className="function-card">

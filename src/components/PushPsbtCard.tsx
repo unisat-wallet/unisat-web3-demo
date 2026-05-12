@@ -10,7 +10,7 @@ export function PushPsbtCard() {
     data: "",
   });
   const doc_url =
-    "https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#pushtx";
+    "https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-transaction.md#pushpsbt";
 
   return (
     <Card size="small" title="Push Psbt Hex" style={{ margin: 10 }}>

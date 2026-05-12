@@ -10,7 +10,7 @@ export function SendBitcoinCard() {
     data: "",
   });
   const doc_url =
-    "https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#sendbitcoin";
+    "https://github.com/unisat-wallet/wallet/blob/master/docs/api/manage-assets.md#sendbitcoin";
 
   return (
     <Card size="small" title="Send Bitcoin" style={{ margin: 10 }}>

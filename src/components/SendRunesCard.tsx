@@ -11,7 +11,7 @@ export function SendRunesCard() {
     data: "",
   });
   const doc_url =
-    "https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#sendrunes";
+    "https://github.com/unisat-wallet/wallet/blob/master/docs/api/manage-assets.md#sendrunes";
   return (
     <Card size="small" title="Send Runes" style={{ margin: 10 }}>
       <div style={{ textAlign: "left", marginTop: 10 }}>

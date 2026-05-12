@@ -10,7 +10,7 @@ export function SignPsbtCard() {
     data: "",
   });
   const doc_url =
-    "https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#signpsbt";
+    "https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-transaction.md#signpsbt";
   return (
     <Card size="small" title="Sign Psbt" style={{ margin: 10 }}>
       <div style={{ textAlign: "left", marginTop: 10 }}>

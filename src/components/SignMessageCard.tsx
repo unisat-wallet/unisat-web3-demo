@@ -9,7 +9,7 @@ export function SignMessageCard() {
     data: "",
   });
   const doc_url =
-    "https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#signmessage";
+    "https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-message.md#signmessage";
   return (
     <Card size="small" title="Sign Message" style={{ margin: 10 }}>
       <div style={{ textAlign: "left", marginTop: 10 }}>

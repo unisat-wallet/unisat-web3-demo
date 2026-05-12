@@ -9,7 +9,7 @@ export const pushTxConfig: DemoConfig = {
   title: 'Push Transaction',
   category: 'broadcast',
   apiMethod: 'unisat.pushTx',
-  docUrl: 'https://docs.unisat.io/dev/unisat-developer-center/unisat-wallet#pushtx',
+  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-transaction.md#pushtx',
   description: 'Broadcast a raw transaction to the network.',
   walletConnectSupported: false,
 };

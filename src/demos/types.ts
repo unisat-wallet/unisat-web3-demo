@@ -28,22 +28,22 @@ export interface DemoConfig {
 export type DemoCategory =
   | 'signing'      // Message and PSBT signing
   | 'transaction'  // Sending BTC, inscriptions, runes
+  | 'rgb'          // RGB assets, invoices and payments
   | 'broadcast'    // Push tx/psbt
-  | 'advanced'     // Multi-sign, batch operations
-  | 'rgb';         // RGB wallet operations
+  | 'advanced';    // Multi-sign, batch operations
 
 export const CATEGORY_LABELS: Record<DemoCategory, string> = {
   signing: 'Signing',
   transaction: 'Transactions',
+  rgb: 'RGB',
   broadcast: 'Broadcast',
   advanced: 'Advanced',
-  rgb: 'RGB',
 };
 
 export const CATEGORY_ORDER: DemoCategory[] = [
   'signing',
   'transaction',
+  'rgb',
   'broadcast',
   'advanced',
-  'rgb',
 ];

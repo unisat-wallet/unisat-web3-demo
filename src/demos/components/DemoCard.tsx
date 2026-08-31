@@ -25,33 +25,35 @@ export function DemoCard({ config, result, children, extra }: DemoCardProps) {
       }
       extra={extra}
     >
-      <div className="demo-card-meta">
-        {config.walletConnectSupported && (
-          <span className="wallet-connect-note">
-            <Tag color="blue">WalletConnect supported</Tag>
-            <Tooltip
-              title={
-                <span>
-                  This API can be called through a WalletConnect session with a compatible external wallet. It does not indicate that a wallet is currently connected.{' '}
-                  <a
-                    className="wallet-connect-doc-link"
-                    href="https://github.com/unisat-wallet/wallet-toolkit/tree/main/packages/wallet-connect-react#readme"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View the WalletConnect React library ↗
-                  </a>
-                </span>
-              }
-            >
-              <button className="info-tooltip" type="button" aria-label="About WalletConnect support">
-                <QuestionCircleOutlined />
-              </button>
-            </Tooltip>
-          </span>
-        )}
-        {config.docUrl && <a href={config.docUrl} target="_blank" rel="noopener noreferrer">Open API docs ↗</a>}
-      </div>
+      {(config.walletConnectSupported || config.docUrl) && (
+        <div className="demo-card-meta">
+          {config.walletConnectSupported && (
+            <span className="wallet-connect-note">
+              <Tag color="blue">WalletConnect supported</Tag>
+              <Tooltip
+                title={
+                  <span>
+                    This API can be called through a WalletConnect session with a compatible external wallet. It does not indicate that a wallet is currently connected.{' '}
+                    <a
+                      className="wallet-connect-doc-link"
+                      href="https://github.com/unisat-wallet/wallet-toolkit/tree/main/packages/wallet-connect-react#readme"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View the WalletConnect React library ↗
+                    </a>
+                  </span>
+                }
+              >
+                <button className="info-tooltip" type="button" aria-label="About WalletConnect support">
+                  <QuestionCircleOutlined />
+                </button>
+              </Tooltip>
+            </span>
+          )}
+          {config.docUrl && <a href={config.docUrl} target="_blank" rel="noopener noreferrer">Open API docs ↗</a>}
+        </div>
+      )}
 
       <div className="demo-card-form">{children}</div>
 

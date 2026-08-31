@@ -66,9 +66,31 @@ a {
 .demo-result { margin-top: 20px; text-align: left; }
 .demo-result-data { max-height: 200px; margin: 0; overflow: auto; color: #33415e; font-size: 12px; line-height: 1.55; }
 
+.rgb-inline-fields, .rgb-section-actions { display: flex; align-items: end; gap: 10px; flex-wrap: wrap; }
+.rgb-inline-fields label, .rgb-form-grid label { display: grid; gap: 5px; color: #4a5670; font-size: 12px; font-weight: 650; }
+.rgb-inline-fields .ant-input-number { width: 92px; }
+.rgb-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+.rgb-form-grid label:first-child:has(.ant-input-textarea) { grid-column: 1 / -1; }
+.rgb-form-grid em { color: #8894a9; font-size: 10px; font-style: normal; font-weight: 400; }
+.rgb-form-grid + .ant-btn { margin-top: 16px; }
+.rgb-section-actions { justify-content: space-between; margin-bottom: 11px; }
+.rgb-section-actions > span { color: #7d89a0; font-size: 12px; }
+.rgb-payment-actions { margin-top: 12px; }
+.rgb-payment-status { margin-top: 19px; padding: 14px; border: 1px solid #dce5fb; border-radius: 8px; background: #f7f9ff; }
+.rgb-payment-status > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #42506a; font-size: 12px; font-weight: 700; }
+.rgb-payment-status .ant-tag { margin: 0; border-radius: 999px; }
+.rgb-payment-status dl { margin: 12px 0 0; }
+.rgb-payment-status dl > div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 9px; padding-top: 7px; border-top: 1px solid #e4eafb; }
+.rgb-payment-status dl > div + div { margin-top: 7px; }
+.rgb-payment-status dt { color: #7b879c; font-size: 11px; }
+.rgb-payment-status dd { min-width: 0; margin: 0; color: #41506e; font-family: monospace; font-size: 11px; overflow-wrap: anywhere; }
+
 @media (max-width: 576px) {
   .demo-card .ant-card-head, .demo-card .ant-card-body { padding-inline: 16px; }
   .demo-card-meta { align-items: flex-start; flex-direction: column; gap: 5px; }
   .demo-card-meta a { margin-left: 0; }
+  .rgb-form-grid { grid-template-columns: 1fr; }
+  .rgb-form-grid label:first-child:has(.ant-input-textarea) { grid-column: auto; }
+  .rgb-section-actions { align-items: flex-start; flex-direction: column; }
   .message-type-selector .ant-space { margin-top: 8px; }
 }

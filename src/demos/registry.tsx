@@ -17,6 +17,11 @@ import { SendInscriptionDemo, sendInscriptionConfig } from './transaction/SendIn
 import { SendRunesDemo, sendRunesConfig } from './transaction/SendRunesDemo';
 import { InscribeTransferDemo, inscribeTransferConfig } from './transaction/InscribeTransferDemo';
 
+// RGB demos
+import { RgbAssetsDemo, rgbAssetsConfig } from './rgb/RgbAssetsDemo';
+import { RgbReceiveDemo, rgbReceiveConfig } from './rgb/RgbReceiveDemo';
+import { RgbPaymentDemo, rgbPaymentConfig } from './rgb/RgbPaymentDemo';
+
 // Broadcast demos
 import { PushPsbtDemo, pushPsbtConfig } from './broadcast/PushPsbtDemo';
 import { PushTxDemo, pushTxConfig } from './broadcast/PushTxDemo';
@@ -24,9 +29,6 @@ import { PushTxDemo, pushTxConfig } from './broadcast/PushTxDemo';
 // Advanced demos
 import { MultiSignMessageDemo, multiSignMessageConfig } from './advanced/MultiSignMessageDemo';
 import { DeriveContextHashDemo, deriveContextHashConfig } from './advanced/DeriveContextHashDemo';
-
-// RGB demos
-import { RgbWalletFlowDemo, rgbWalletFlowConfig } from './rgb/RgbWalletFlowDemo';
 
 /**
  * Demo entry with config and component
@@ -55,6 +57,11 @@ export const DEMOS: DemoEntry[] = [
   { config: sendRunesConfig, component: SendRunesDemo },
   { config: inscribeTransferConfig, component: InscribeTransferDemo },
 
+  // RGB
+  { config: rgbAssetsConfig, component: RgbAssetsDemo },
+  { config: rgbReceiveConfig, component: RgbReceiveDemo },
+  { config: rgbPaymentConfig, component: RgbPaymentDemo },
+
   // Broadcast
   { config: pushPsbtConfig, component: PushPsbtDemo },
   { config: pushTxConfig, component: PushTxDemo },
@@ -62,9 +69,6 @@ export const DEMOS: DemoEntry[] = [
   // Advanced
   { config: multiSignMessageConfig, component: MultiSignMessageDemo },
   { config: deriveContextHashConfig, component: DeriveContextHashDemo },
-
-  // RGB
-  { config: rgbWalletFlowConfig, component: RgbWalletFlowDemo },
 ];
 
 /**

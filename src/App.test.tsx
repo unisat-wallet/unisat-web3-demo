@@ -2,8 +2,22 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+jest.mock('@unisat/wallet-connect-react', () => ({
+  useWallet: () => ({
+    account: undefined,
+    wallet: undefined,
+    isConnecting: false,
+    isInitialized: true,
+    connect: jest.fn(),
+    disconnect: jest.fn(),
+  }),
+}));
+
+test('renders the API explorer in preview mode', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  expect(screen.getByText('UniSat Developer Lab')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /connect wallet/i })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Sign Message' })).toBeInTheDocument();
+  expect(screen.getByText('Preview mode')).toBeInTheDocument();
 });

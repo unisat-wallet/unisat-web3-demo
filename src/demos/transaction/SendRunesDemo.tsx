@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Input, InputNumber } from 'antd';
+import { Button, Input } from 'antd';
 import { DemoCard, DemoField } from '../components/DemoCard';
 import { useDemoExecution, getUnisat } from '../hooks/useDemoExecution';
 import type { DemoConfig } from '../types';

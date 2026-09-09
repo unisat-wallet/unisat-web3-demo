@@ -1,4 +1,5 @@
-import { Card, Alert, Spin } from 'antd';
+import { Card, Alert, Spin, Tag, Tooltip } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import type { DemoConfig, DemoResult } from '../types';
 
 interface DemoCardProps {
@@ -15,27 +16,44 @@ interface DemoCardProps {
 export function DemoCard({ config, result, children, extra }: DemoCardProps) {
   return (
     <Card
-      size="small"
-      title={config.title}
-      style={{ margin: 10 }}
+      className="demo-card"
+      title={
+        <div className="demo-card-heading">
+          <span className="eyebrow">REQUEST</span>
+          <code>{config.apiMethod || config.title}</code>
+        </div>
+      }
       extra={extra}
     >
-      {config.docUrl && (
-        <div style={{ textAlign: 'left', marginTop: 10 }}>
-          <div style={{ fontWeight: 'bold' }}>Docs:</div>
-          <a href={config.docUrl} target="_blank" rel="noopener noreferrer">
-            {config.docUrl}
-          </a>
-        </div>
-      )}
+      <div className="demo-card-meta">
+        {config.walletConnectSupported && (
+          <span className="wallet-connect-note">
+            <Tag color="blue">WalletConnect supported</Tag>
+            <Tooltip
+              title={
+                <span>
+                  This API can be called through a WalletConnect session with a compatible external wallet. It does not indicate that a wallet is currently connected.{' '}
+                  <a
+                    className="wallet-connect-doc-link"
+                    href="https://github.com/unisat-wallet/wallet-toolkit/tree/main/packages/wallet-connect-react#readme"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View the WalletConnect React library ↗
+                  </a>
+                </span>
+              }
+            >
+              <button className="info-tooltip" type="button" aria-label="About WalletConnect support">
+                <QuestionCircleOutlined />
+              </button>
+            </Tooltip>
+          </span>
+        )}
+        {config.docUrl && <a href={config.docUrl} target="_blank" rel="noopener noreferrer">Open API docs ↗</a>}
+      </div>
 
-      {config.description && (
-        <div style={{ textAlign: 'left', marginTop: 10, color: '#666' }}>
-          {config.description}
-        </div>
-      )}
-
-      {children}
+      <div className="demo-card-form">{children}</div>
 
       <DemoResultDisplay result={result} />
     </Card>
@@ -53,9 +71,9 @@ function DemoResultDisplay({ result }: DemoResultDisplayProps) {
 
   if (result.status === 'loading') {
     return (
-      <div style={{ textAlign: 'center', marginTop: 16 }}>
+      <div className="demo-result-loading">
         <Spin size="small" />
-        <span style={{ marginLeft: 8 }}>Requesting...</span>
+        <span>Requesting wallet approval…</span>
       </div>
     );
   }
@@ -64,9 +82,9 @@ function DemoResultDisplay({ result }: DemoResultDisplayProps) {
     return (
       <Alert
         type="error"
-        message="Error"
+        message="Request failed"
         description={result.error}
-        style={{ marginTop: 16, textAlign: 'left' }}
+        className="demo-result"
       />
     );
   }
@@ -75,13 +93,13 @@ function DemoResultDisplay({ result }: DemoResultDisplayProps) {
     return (
       <Alert
         type="success"
-        message="Success"
+        message="Request completed"
         description={
-          <div style={{ wordWrap: 'break-word', maxHeight: 200, overflow: 'auto' }}>
+          <pre className="demo-result-data">
             {result.data}
-          </div>
+          </pre>
         }
-        style={{ marginTop: 16, textAlign: 'left' }}
+        className="demo-result"
       />
     );
   }
@@ -100,8 +118,8 @@ export function DemoField({
   children: React.ReactNode;
 }) {
   return (
-    <div style={{ textAlign: 'left', marginTop: 10 }}>
-      <div style={{ fontWeight: 'bold', marginBottom: 4 }}>{label}:</div>
+    <div className="demo-field">
+      <div className="demo-field-label">{label}</div>
       {children}
     </div>
   );

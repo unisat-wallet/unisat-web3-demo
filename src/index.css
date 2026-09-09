@@ -5,39 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f5f7fb;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.ant-card-body {
-  padding: 16px;
-  word-wrap: break-word;
-  word-break: break-word;
-}
-
-.ant-collapse-content-box {
-  padding: 8px !important;
-}
-
-@media (max-width: 576px) {
-  .ant-card-body {
-    padding: 12px;
-  }
-
-  .ant-card-head-title {
-    font-size: 14px;
-  }
-
-  .ant-collapse-header {
-    padding: 8px 16px !important;
-  }
-
-  .message-type-selector .ant-space {
-    margin-top: 8px;
-  }
 }
 
 .ant-input,
@@ -60,4 +33,42 @@ a {
 
 .ant-radio-wrapper {
   margin-right: 0 !important;
+}
+
+.demo-card.ant-card {
+  border-color: #e5e9f2;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(28, 43, 79, .025);
+}
+
+.demo-card .ant-card-head {
+  min-height: 61px;
+  padding: 0 22px;
+  border-bottom-color: #edf0f5;
+}
+
+.demo-card .ant-card-head-title { padding: 12px 0; }
+.demo-card .ant-card-body { padding: 22px; word-wrap: break-word; word-break: break-word; }
+.demo-card-heading code { display: block; margin-top: 3px; color: #25314b; font-size: 14px; font-weight: 650; }
+.demo-card-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 23px; margin-bottom: 18px; }
+.demo-card-meta .ant-tag { margin: 0; border-radius: 999px; }
+.wallet-connect-note { display: inline-flex; align-items: center; gap: 5px; }
+.info-tooltip { display: grid; width: 18px; height: 18px; place-items: center; padding: 0; border: 0; color: #8490a4; background: transparent; cursor: help; }
+.info-tooltip:hover { color: #4966c8; }
+.wallet-connect-doc-link { display: inline-block; margin-top: 6px; color: #9db5ff; font-weight: 600; }
+.wallet-connect-doc-link:hover { color: #fff; }
+.demo-card-meta a { margin-left: auto; color: #4966c8; font-size: 12px; font-weight: 600; }
+.demo-field { margin-top: 17px; text-align: left; }
+.demo-field:first-child { margin-top: 0; }
+.demo-field-label { margin-bottom: 7px; color: #4a5670; font-size: 12px; font-weight: 650; }
+.demo-card-form > .ant-btn { margin-top: 18px !important; }
+.demo-result-loading { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; padding: 12px; border-radius: 7px; background: #f7f9fd; color: #62708a; font-size: 13px; }
+.demo-result { margin-top: 20px; text-align: left; }
+.demo-result-data { max-height: 200px; margin: 0; overflow: auto; color: #33415e; font-size: 12px; line-height: 1.55; }
+
+@media (max-width: 576px) {
+  .demo-card .ant-card-head, .demo-card .ant-card-body { padding-inline: 16px; }
+  .demo-card-meta { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .demo-card-meta a { margin-left: 0; }
+  .message-type-selector .ant-space { margin-top: 8px; }
 }

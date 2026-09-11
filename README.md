@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+RGB swap integration examples are documented in
+[`docs/RGB_SWAP_TESTING.md`](./docs/RGB_SWAP_TESTING.md). The demo UI provides
+separate pages for backend-coordinated and pure P2P swap testing.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

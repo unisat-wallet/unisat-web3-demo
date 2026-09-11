@@ -61,6 +61,7 @@ a {
 .demo-field { margin-top: 17px; text-align: left; }
 .demo-field:first-child { margin-top: 0; }
 .demo-field-label { margin-bottom: 7px; color: #4a5670; font-size: 12px; font-weight: 650; }
+.demo-field > .ant-alert + * { margin-top: 12px; }
 .demo-card-form > .ant-btn { margin-top: 18px !important; }
 .demo-result-loading { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; padding: 12px; border-radius: 7px; background: #f7f9fd; color: #62708a; font-size: 13px; }
 .demo-result { margin-top: 20px; text-align: left; }

@@ -18,7 +18,7 @@ export const rgbAssetsConfig: DemoConfig = {
   key: 'getRgbAssets',
   title: 'RGB Assets',
   category: 'rgb',
-  apiMethod: 'unisat.getRgbAssets',
+  apiMethod: 'unisat.rgb.getAssets',
   description: 'Read the wallet’s local RGB asset balances. This experimental API does not open a wallet approval.',
 };
 
@@ -32,7 +32,7 @@ export function RgbAssetsDemo() {
   const loadAssets = async () => {
     try {
       await execute(async () => {
-        const response = await getUnisat().getRgbAssets(page, pageSize);
+        const response = await getUnisat().rgb.getAssets(page, pageSize);
         setAssets(response?.list || []);
         setTotal(response?.total);
         return response;

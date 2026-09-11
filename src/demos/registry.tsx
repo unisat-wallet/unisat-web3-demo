@@ -21,6 +21,8 @@ import { InscribeTransferDemo, inscribeTransferConfig } from './transaction/Insc
 import { RgbAssetsDemo, rgbAssetsConfig } from './rgb/RgbAssetsDemo';
 import { RgbReceiveDemo, rgbReceiveConfig } from './rgb/RgbReceiveDemo';
 import { RgbPaymentDemo, rgbPaymentConfig } from './rgb/RgbPaymentDemo';
+import { RgbSellSwapDemo, rgbSellSwapConfig } from './rgb/RgbSellSwapDemo';
+import { RgbBuySwapDemo, rgbBuySwapConfig } from './rgb/RgbBuySwapDemo';
 
 // Broadcast demos
 import { PushPsbtDemo, pushPsbtConfig } from './broadcast/PushPsbtDemo';
@@ -61,6 +63,8 @@ export const DEMOS: DemoEntry[] = [
   { config: rgbAssetsConfig, component: RgbAssetsDemo },
   { config: rgbReceiveConfig, component: RgbReceiveDemo },
   { config: rgbPaymentConfig, component: RgbPaymentDemo },
+  { config: rgbSellSwapConfig, component: RgbSellSwapDemo },
+  { config: rgbBuySwapConfig, component: RgbBuySwapDemo },
 
   // Broadcast
   { config: pushPsbtConfig, component: PushPsbtDemo },

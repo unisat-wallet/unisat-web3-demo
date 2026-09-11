@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, Button, Input, InputNumber, Space, Table, Tag } from 'antd';
+import { Alert, Button, Input, InputNumber, Select, Space, Table, Tag } from 'antd';
 import { DemoCard, DemoField } from '../components/DemoCard';
 import { getUnisat, useDemoExecution } from '../hooks/useDemoExecution';
 import type { DemoConfig } from '../types';
@@ -17,7 +17,7 @@ export const rgbReceiveConfig: DemoConfig = {
   key: 'rgbReceive',
   title: 'RGB Receive',
   category: 'rgb',
-  apiMethod: 'unisat.createRgbReceiveInvoice / getRgbPendingReceives / acceptRgbReceive / rejectRgbReceive',
+  apiMethod: 'unisat.rgb.createReceiveInvoice / getPendingReceives / acceptReceive / rejectReceive',
   description: 'Create a blind RGB receive invoice, then inspect and accept or reject incoming consignments.',
 };
 
@@ -25,6 +25,7 @@ export function RgbReceiveDemo() {
   const [assetId, setAssetId] = useState('');
   const [amount, setAmount] = useState('');
   const [durationSeconds, setDurationSeconds] = useState<number>(900);
+  const [recipientType, setRecipientType] = useState<'blind' | 'witness'>('blind');
   const [createdInvoice, setCreatedInvoice] = useState('');
   const [receives, setReceives] = useState<RgbReceive[]>([]);
   const { result, execute, isLoading } = useDemoExecution();
@@ -32,7 +33,7 @@ export function RgbReceiveDemo() {
   const refreshReceives = async () => {
     try {
       await execute(async () => {
-        const response = await getUnisat().getRgbPendingReceives();
+        const response = await getUnisat().rgb.getPendingReceives();
         setReceives(response?.list || []);
         return response;
       }, (data) => JSON.stringify(data, null, 2));
@@ -45,10 +46,11 @@ export function RgbReceiveDemo() {
     try {
       const response = await execute(async () => {
         if (durationSeconds < 1) throw new Error('Invoice expiry must be at least one second');
-        return getUnisat().createRgbReceiveInvoice({
+        return getUnisat().rgb.createReceiveInvoice({
           ...(assetId.trim() ? { assetId: assetId.trim() } : {}),
           ...(amount.trim() ? { amount: amount.trim() } : {}),
           durationSeconds,
+          recipientType,
         });
       }, (data) => JSON.stringify(data, null, 2));
       if (response?.invoice) setCreatedInvoice(response.invoice);
@@ -62,11 +64,11 @@ export function RgbReceiveDemo() {
     try {
       await execute(
         () => accepted
-          ? getUnisat().acceptRgbReceive(receive.recipientId!)
-          : getUnisat().rejectRgbReceive(receive.recipientId!),
+          ? getUnisat().rgb.acceptReceive(receive.recipientId!)
+          : getUnisat().rgb.rejectReceive(receive.recipientId!),
         (data) => JSON.stringify(data, null, 2),
       );
-      const latest = await getUnisat().getRgbPendingReceives();
+      const latest = await getUnisat().rgb.getPendingReceives();
       setReceives(latest?.list || []);
     } catch {
       // useDemoExecution has already rendered the request error.
@@ -86,6 +88,7 @@ export function RgbReceiveDemo() {
           <label>Asset ID <em>optional — blank accepts any asset</em><Input value={assetId} onChange={(event) => setAssetId(event.target.value)} placeholder="RGB contract ID" /></label>
           <label>Amount <em>optional — blank accepts any amount</em><Input value={amount} onChange={(event) => setAmount(event.target.value)} placeholder="Atomic units" /></label>
           <label>Expires in seconds<InputNumber value={durationSeconds} min={1} onChange={(value) => setDurationSeconds(value || 1)} /></label>
+          <label>Recipient type<Select value={recipientType} onChange={setRecipientType} options={[{ value: 'blind', label: 'Blind (default)' }, { value: 'witness', label: 'Witness' }]} /></label>
         </div>
         <Button type="primary" loading={isLoading} onClick={() => void createInvoice()}>Create receive invoice</Button>
       </DemoField>

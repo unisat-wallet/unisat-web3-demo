@@ -10,7 +10,7 @@ export const rgbPaymentConfig: DemoConfig = {
   key: 'rgbPayment',
   title: 'RGB Payment',
   category: 'rgb',
-  apiMethod: 'unisat.prepareRgbPayment / signRgbPayment / cancelRgbPayment / getRgbPaymentStatus',
+  apiMethod: 'unisat.rgb.preparePayment / signPayment / cancelPayment / getPaymentStatus',
   description: 'Prepare an RGB payment, approve its signature, then monitor or cancel that exact transfer ID.',
 };
 
@@ -29,7 +29,7 @@ export function RgbPaymentDemo() {
         if (!invoice.trim()) throw new Error('Enter an RGB invoice');
         if (!assetId.trim()) throw new Error('Enter the RGB asset ID used to pay');
         if (feeRate && Number(feeRate) <= 0) throw new Error('Fee rate must be greater than zero');
-        return getUnisat().prepareRgbPayment({
+        return getUnisat().rgb.preparePayment({
           invoice: invoice.trim(),
           assetId: assetId.trim(),
           ...(amount.trim() ? { amount: amount.trim() } : {}),
@@ -50,7 +50,7 @@ export function RgbPaymentDemo() {
     try {
       await execute(async () => {
         if (!transferId.trim()) throw new Error('Prepare a payment or enter its transfer ID first');
-        return getUnisat().signRgbPayment(transferId.trim());
+        return getUnisat().rgb.signPayment(transferId.trim());
       }, (data) => JSON.stringify(data, null, 2));
       await checkStatus();
     } catch {
@@ -62,7 +62,7 @@ export function RgbPaymentDemo() {
     try {
       const response = await execute(async () => {
         if (!transferId.trim()) throw new Error('Enter a transfer ID first');
-        return getUnisat().getRgbPaymentStatus(transferId.trim());
+        return getUnisat().rgb.getPaymentStatus(transferId.trim());
       }, (data) => JSON.stringify(data, null, 2));
       if (response) setPaymentStatus(response);
     } catch {
@@ -74,7 +74,7 @@ export function RgbPaymentDemo() {
     try {
       await execute(async () => {
         if (!transferId.trim()) throw new Error('Enter a transfer ID first');
-        return getUnisat().cancelRgbPayment(transferId.trim());
+        return getUnisat().rgb.cancelPayment(transferId.trim());
       }, (data) => JSON.stringify(data, null, 2));
       setPaymentStatus({ transferId, status: 'canceled' });
     } catch {
@@ -100,7 +100,7 @@ export function RgbPaymentDemo() {
         <Button type="primary" loading={isLoading} onClick={() => void preparePayment()}>Prepare RGB payment</Button>
       </DemoField>
       <DemoField label="2. Sign, monitor or cancel">
-        <Input value={transferId} onChange={(event) => setTransferId(event.target.value)} placeholder="Transfer ID returned by prepareRgbPayment" />
+        <Input value={transferId} onChange={(event) => setTransferId(event.target.value)} placeholder="Transfer ID returned by rgb.preparePayment" />
         <Space wrap className="rgb-payment-actions">
           <Button type="primary" loading={isLoading} disabled={!transferId.trim()} onClick={() => void signPayment()}>Sign & send payment</Button>
           <Button loading={isLoading} disabled={!transferId.trim()} onClick={() => void checkStatus()}>Check status</Button>

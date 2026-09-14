@@ -85,7 +85,7 @@ function DemoResultDisplay({ result }: DemoResultDisplayProps) {
       <Alert
         type="error"
         message="Request failed"
-        description={result.error}
+        description={<pre className="demo-result-data">{result.error}</pre>}
         className="demo-result"
       />
     );

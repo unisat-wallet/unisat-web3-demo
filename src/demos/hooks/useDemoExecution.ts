@@ -1,36 +1,37 @@
 import { useState, useCallback } from 'react';
 import type { DemoResult } from '../types';
 
-function stringifyObject(value: unknown) {
+function serializeError(value: unknown): string {
+  const seen = new WeakSet<object>();
   try {
-    return JSON.stringify(value, null, 2);
+    return JSON.stringify(value, (_key, item) => {
+      if (typeof item === 'bigint') return item.toString();
+      if (typeof item === 'object' && item !== null) {
+        if (seen.has(item)) return '[Circular]';
+        seen.add(item);
+        if (item instanceof Error) {
+          return {
+            name: item.name,
+            message: item.message,
+            ...(item.cause === undefined ? {} : { cause: item.cause }),
+            ...Object.fromEntries(Object.entries(item)),
+          };
+        }
+      }
+      return item;
+    }, 2);
   } catch {
     return String(value);
   }
 }
 
-function formatError(error: unknown) {
-  if (error instanceof Error) {
-    return error.message || error.name;
+export function formatDemoError(error: unknown): string {
+  if (typeof error === 'string') return error;
+  if (error instanceof Error && error.message) {
+    const details = Object.entries(error).length ? serializeError(error) : '';
+    return details ? `${error.message}\n\nDetails:\n${details}` : error.message;
   }
-
-  if (error && typeof error === 'object') {
-    const record = error as Record<string, any>;
-    const message =
-      record.message ||
-      record.msg ||
-      record.error?.message ||
-      record.error?.msg ||
-      record.data?.message ||
-      record.data?.msg;
-
-    if (typeof message === 'string' && message.length > 0) {
-      return `${message}\n\n${stringifyObject(error)}`;
-    }
-
-    return stringifyObject(error);
-  }
-
+  if (error && typeof error === 'object') return serializeError(error);
   return String(error);
 }
 
@@ -51,7 +52,8 @@ export function useDemoExecution() {
       setResult({ status: 'success', data: formatted });
       return data;
     } catch (e) {
-      setResult({ status: 'error', error: formatError(e) });
+      const error = formatDemoError(e);
+      setResult({ status: 'error', error });
       throw e;
     }
   }, []);

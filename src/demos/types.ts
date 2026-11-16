@@ -26,6 +26,7 @@ export interface DemoConfig {
 }
 
 export type DemoCategory =
+  | 'wallet'       // Connection, account and wallet state
   | 'signing'      // Message and PSBT signing
   | 'transaction'  // Sending BTC, inscriptions, runes
   | 'rgb'          // RGB assets, invoices and payments
@@ -34,6 +35,7 @@ export type DemoCategory =
   | 'advanced';    // Multi-sign, batch operations
 
 export const CATEGORY_LABELS: Record<DemoCategory, string> = {
+  wallet: 'Wallet',
   signing: 'Signing',
   transaction: 'Transactions',
   rgb: 'RGB',
@@ -43,6 +45,7 @@ export const CATEGORY_LABELS: Record<DemoCategory, string> = {
 };
 
 export const CATEGORY_ORDER: DemoCategory[] = [
+  'wallet',
   'signing',
   'transaction',
   'rgb',

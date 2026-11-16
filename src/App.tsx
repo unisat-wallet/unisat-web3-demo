@@ -14,6 +14,7 @@ type AppProps = {
 };
 
 const CATEGORY_DESCRIPTIONS: Record<DemoCategory, string> = {
+  wallet: 'Connection & state',
   signing: 'Messages & PSBTs',
   transaction: 'Bitcoin & assets',
   rgb: 'Experimental assets',

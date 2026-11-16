@@ -18,8 +18,17 @@ test('renders the API explorer in preview mode', () => {
 
   expect(screen.getByText('UniSat Wallet Demo')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /connect wallet/i })).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: 'Sign Message' })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Account & Connection' })).toBeInTheDocument();
   expect(screen.getByText('Preview mode')).toBeInTheDocument();
+});
+
+test('renders wallet read APIs as a dedicated menu group', () => {
+  render(<App />);
+
+  expect(screen.getByRole('button', { name: 'Open Wallet APIs' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /Account & Connection/ })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^Wallet State/ })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /^Wallet Events/ })).toBeInTheDocument();
 });
 
 test('renders WebRGB as its own grouped API menu', () => {

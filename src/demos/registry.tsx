@@ -6,6 +6,16 @@
 import type { DemoConfig, DemoCategory } from './types';
 import { CATEGORY_ORDER } from './types';
 
+// Wallet connection and state demos
+import {
+  WalletAccountDemo,
+  walletAccountConfig,
+  WalletStateDemo,
+  walletStateConfig,
+  WalletEventsDemo,
+  walletEventsConfig,
+} from './wallet';
+
 // Signing demos
 import { SignMessageDemo, signMessageConfig } from './signing/SignMessageDemo';
 import { SignPsbtDemo, signPsbtConfig } from './signing/SignPsbtDemo';
@@ -65,6 +75,11 @@ export interface DemoEntry {
  * 3. Add an entry here
  */
 export const DEMOS: DemoEntry[] = [
+  // Wallet
+  { config: walletAccountConfig, component: WalletAccountDemo },
+  { config: walletStateConfig, component: WalletStateDemo },
+  { config: walletEventsConfig, component: WalletEventsDemo },
+
   // Signing
   { config: signMessageConfig, component: SignMessageDemo },
   { config: signPsbtConfig, component: SignPsbtDemo },

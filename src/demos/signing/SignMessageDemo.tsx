@@ -17,17 +17,25 @@ export const signMessageConfig: DemoConfig = {
 
 export function SignMessageDemo() {
   const [message, setMessage] = useState('hello world~');
+  const [signingType, setSigningType] = useState<'ecdsa' | 'bip322-simple'>();
   const { result, execute, isLoading } = useDemoExecution();
   const { signMessage, wallet } = useWallet();
 
   const handleSign = async (type: 'ecdsa' | 'bip322-simple') => {
-    await execute(async () => {
-      // Use wallet-connect if available, otherwise fallback to unisat
-      if (wallet) {
-        return signMessage(message, type);
-      }
-      return getUnisat().signMessage(message, type);
-    });
+    setSigningType(type);
+    try {
+      await execute(async () => {
+        // Use wallet-connect if available, otherwise fallback to unisat
+        if (wallet) {
+          return signMessage(message, type);
+        }
+        return getUnisat().signMessage(message, type);
+      }, (signature) => `${type === 'ecdsa' ? 'ECDSA' : 'BIP-322'} signature\n${String(signature)}`);
+    } catch {
+      // useDemoExecution has already rendered the request error.
+    } finally {
+      setSigningType(undefined);
+    }
   };
 
   return (
@@ -42,15 +50,16 @@ export function SignMessageDemo() {
 
       <Space style={{ marginTop: 16 }}>
         <Button
-          type="primary"
-          loading={isLoading}
-          onClick={() => handleSign('ecdsa')}
+          loading={isLoading && signingType === 'ecdsa'}
+          disabled={isLoading && signingType !== 'ecdsa'}
+          onClick={() => void handleSign('ecdsa')}
         >
           Sign (ECDSA)
         </Button>
         <Button
-          loading={isLoading}
-          onClick={() => handleSign('bip322-simple')}
+          loading={isLoading && signingType === 'bip322-simple'}
+          disabled={isLoading && signingType !== 'bip322-simple'}
+          onClick={() => void handleSign('bip322-simple')}
         >
           Sign (BIP-322)
         </Button>

@@ -1,4 +1,4 @@
-import { Alert, Button, Space, Tag } from 'antd';
+import { Alert, Button, Select, Space, Tag } from 'antd';
 import { DemoCard, DemoField } from '../components/DemoCard';
 import { useDemoExecution } from '../hooks/useDemoExecution';
 import type { DemoConfig } from '../types';
@@ -13,7 +13,15 @@ export const webRgbConnectionConfig: DemoConfig = {
 };
 
 export function WebRgbConnectionDemo() {
-  const { provider, providerName, enabled, setEnabled } = useWebRgbProvider();
+  const {
+    provider,
+    providerName,
+    providers,
+    selectedProviderId,
+    selectProvider,
+    enabled,
+    setEnabled,
+  } = useWebRgbProvider();
   const { result, execute, isLoading } = useDemoExecution();
 
   const run = async (operation: () => Promise<any>) => {
@@ -26,13 +34,26 @@ export function WebRgbConnectionDemo() {
 
   return (
     <DemoCard config={webRgbConnectionConfig} result={result}>
-      <Alert type="info" showIcon message="WebRGB v1 discovery" description="The demo checks window.rgb and dispatches rgb:requestProvider to discover wallets through rgb:announceProvider." />
+      <Alert type="info" showIcon message="WebRGB v1 discovery" description="The demo validates announced providers and requires an explicit wallet choice when multiple providers are discovered." />
       <DemoField label="Discovered provider">
         <Space wrap>
+          <Select
+            value={selectedProviderId || undefined}
+            placeholder={providers.length > 1 ? 'Choose a WebRGB wallet' : 'Discovering wallets...'}
+            style={{ minWidth: 240 }}
+            options={providers.map((option) => ({
+              value: option.id,
+              label: option.rdns ? `${option.name} (${option.rdns})` : option.name,
+            }))}
+            onChange={selectProvider}
+          />
           <Tag color={provider ? 'green' : 'default'}>{provider ? providerName : 'No provider found'}</Tag>
           <Tag color={enabled ? 'processing' : 'default'}>{enabled ? 'Enabled' : 'Not enabled'}</Tag>
         </Space>
       </DemoField>
+      {providers.length > 1 && !provider && (
+        <Alert type="warning" showIcon message="Multiple WebRGB wallets were found. Choose the wallet you intend to use before continuing." />
+      )}
       <DemoField label="Connection interfaces">
         <Space wrap>
           <Button type="primary" loading={isLoading} disabled={!provider} onClick={() => void run(async () => {

@@ -42,9 +42,16 @@ const CHAIN_TYPE_STORAGE_KEY = 'unisat_web3_demo_chain_type';
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const isChainType = (value: unknown): value is ChainType =>
+  typeof value === 'string' && (Object.values(ChainType) as string[]).includes(value);
+
 const readStoredChainType = () => {
-  const chainType = localStorage.getItem(CHAIN_TYPE_STORAGE_KEY) as ChainType | null;
-  return chainType && chainType in ChainType ? chainType : ChainType.BITCOIN_MAINNET;
+  try {
+    const chainType = localStorage.getItem(CHAIN_TYPE_STORAGE_KEY);
+    return isChainType(chainType) ? chainType : ChainType.BITCOIN_MAINNET;
+  } catch {
+    return ChainType.BITCOIN_MAINNET;
+  }
 };
 
 function Root() {
@@ -53,7 +60,11 @@ function Root() {
 
   const syncWalletChainType = useCallback((chainType: ChainType) => {
     setChainType(chainType);
-    localStorage.setItem(CHAIN_TYPE_STORAGE_KEY, chainType);
+    try {
+      localStorage.setItem(CHAIN_TYPE_STORAGE_KEY, chainType);
+    } catch {
+      // Storage can be unavailable in sandboxed or privacy-restricted contexts.
+    }
     wallets.forEach((wallet) => {
       wallet.setChainType(chainType as unknown as WalletConnectChainType);
     });
@@ -65,8 +76,8 @@ function Root() {
       if (unisat) {
         try {
           const chain = await unisat.getChain();
-          if (chain?.enum) {
-            return chain.enum as ChainType;
+          if (isChainType(chain?.enum)) {
+            return chain.enum;
           }
         } catch {
           return fallback;
@@ -82,8 +93,10 @@ function Root() {
     syncWalletChainType(chainType);
     let disposed = false;
 
-    const syncChainType = (chain: { enum: ChainType }) => {
-      syncWalletChainType(chain.enum);
+    const syncChainType = (chain: unknown) => {
+      if (chain && typeof chain === 'object' && 'enum' in chain && isChainType(chain.enum)) {
+        syncWalletChainType(chain.enum);
+      }
     };
 
     getCurrentChainType().then((chainType) => {
@@ -123,7 +136,6 @@ function Root() {
       chainType={chainType as unknown as WalletConnectChainType}
       wallets={wallets}
       notifier={notifier}
-      validateAddress={() => true}
       onConnectError={(error) => {
         message.error(error instanceof Error ? error.message : 'Connection failed');
       }}

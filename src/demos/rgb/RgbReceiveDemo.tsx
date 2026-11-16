@@ -25,6 +25,7 @@ export function RgbReceiveDemo() {
   const [assetId, setAssetId] = useState('');
   const [amount, setAmount] = useState('');
   const [durationSeconds, setDurationSeconds] = useState<number>(900);
+  const [minConfirmations, setMinConfirmations] = useState<number>(3);
   const [recipientType, setRecipientType] = useState<'blind' | 'witness'>('blind');
   const [createdInvoice, setCreatedInvoice] = useState('');
   const [receives, setReceives] = useState<RgbReceive[]>([]);
@@ -51,6 +52,7 @@ export function RgbReceiveDemo() {
           ...(amount.trim() ? { amount: amount.trim() } : {}),
           durationSeconds,
           recipientType,
+          minConfirmations,
         });
       }, (data) => JSON.stringify(data, null, 2));
       if (response?.invoice) setCreatedInvoice(response.invoice);
@@ -87,7 +89,8 @@ export function RgbReceiveDemo() {
         <div className="rgb-form-grid">
           <label>Asset ID <em>optional — blank accepts any asset</em><Input value={assetId} onChange={(event) => setAssetId(event.target.value)} placeholder="RGB contract ID" /></label>
           <label>Amount <em>optional — blank accepts any amount</em><Input value={amount} onChange={(event) => setAmount(event.target.value)} placeholder="Atomic units" /></label>
-          <label>Expires in seconds<InputNumber value={durationSeconds} min={1} onChange={(value) => setDurationSeconds(value || 1)} /></label>
+          <label>Expires in seconds<InputNumber value={durationSeconds} min={1} precision={0} onChange={(value) => setDurationSeconds(value || 1)} /></label>
+          <label>Minimum confirmations<InputNumber value={minConfirmations} min={1} precision={0} onChange={(value) => setMinConfirmations(value ?? 3)} /></label>
           <label>Recipient type<Select value={recipientType} onChange={setRecipientType} options={[{ value: 'blind', label: 'Blind (default)' }, { value: 'witness', label: 'Witness' }]} /></label>
         </div>
         <Button type="primary" loading={isLoading} onClick={() => void createInvoice()}>Create receive invoice</Button>

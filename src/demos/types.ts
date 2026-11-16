@@ -29,6 +29,7 @@ export type DemoCategory =
   | 'signing'      // Message and PSBT signing
   | 'transaction'  // Sending BTC, inscriptions, runes
   | 'rgb'          // RGB assets, invoices and payments
+  | 'webrgb'       // Wallet-neutral WebRGB v1 provider
   | 'broadcast'    // Push tx/psbt
   | 'advanced';    // Multi-sign, batch operations
 
@@ -36,6 +37,7 @@ export const CATEGORY_LABELS: Record<DemoCategory, string> = {
   signing: 'Signing',
   transaction: 'Transactions',
   rgb: 'RGB',
+  webrgb: 'WebRGB',
   broadcast: 'Broadcast',
   advanced: 'Advanced',
 };
@@ -44,6 +46,7 @@ export const CATEGORY_ORDER: DemoCategory[] = [
   'signing',
   'transaction',
   'rgb',
+  'webrgb',
   'broadcast',
   'advanced',
 ];

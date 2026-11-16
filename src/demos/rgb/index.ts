@@ -1,4 +1,5 @@
 export { RgbAssetsDemo, rgbAssetsConfig } from './RgbAssetsDemo';
+export { RgbIssueDemo, rgbIssueConfig } from './RgbIssueDemo';
 export { RgbReceiveDemo, rgbReceiveConfig } from './RgbReceiveDemo';
 export { RgbPaymentDemo, rgbPaymentConfig } from './RgbPaymentDemo';
 export { RgbSellSwapDemo, rgbSellSwapConfig } from './RgbSellSwapDemo';

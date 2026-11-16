@@ -77,6 +77,7 @@ a {
 .rgb-section-actions { justify-content: space-between; margin-bottom: 11px; }
 .rgb-section-actions > span { color: #7d89a0; font-size: 12px; }
 .rgb-payment-actions { margin-top: 12px; }
+.rgb-inline-alert { margin-top: 12px; }
 .rgb-payment-status { margin-top: 19px; padding: 14px; border: 1px solid #dce5fb; border-radius: 8px; background: #f7f9ff; }
 .rgb-payment-status > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #42506a; font-size: 12px; font-weight: 700; }
 .rgb-payment-status .ant-tag { margin: 0; border-radius: 999px; }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
 import { Button, Input, message, Radio, Tag } from 'antd';
 import { CHAINS_MAP, ChainType } from './const';
@@ -17,6 +17,7 @@ const CATEGORY_DESCRIPTIONS: Record<DemoCategory, string> = {
   signing: 'Messages & PSBTs',
   transaction: 'Bitcoin & assets',
   rgb: 'Experimental assets',
+  webrgb: 'WebRGB v1 interfaces',
   broadcast: 'Publish to network',
   advanced: 'Power-user tools',
 };
@@ -40,6 +41,7 @@ function App({
   const [selectedDemoKey, setSelectedDemoKey] = useState(DEMOS[0]?.config.key ?? '');
   const [search, setSearch] = useState('');
   const [messageApi, contextHolder] = message.useMessage();
+  const workspaceRef = useRef<HTMLElement>(null);
 
   const chain = CHAINS_MAP[chainType];
   const demosByCategory = useMemo(() => getDemosByCategory(), []);
@@ -49,6 +51,10 @@ function App({
   useEffect(() => {
     setChainType(initialChainType);
   }, [initialChainType]);
+
+  useEffect(() => {
+    workspaceRef.current?.scrollTo?.({ top: 0 });
+  }, [selectedDemoKey]);
 
   const getBasicInfo = useCallback(async () => {
     const unisat = (window as any).unisat;
@@ -230,7 +236,7 @@ function App({
           </section>
         </aside>
 
-        <section className="workspace">
+        <section className="workspace" ref={workspaceRef}>
           <div className="workspace-intro">
             <div>
               <div className="breadcrumbs">{CATEGORY_LABELS[selectedDemo.config.category]} <span>/</span> {selectedDemo.config.title}</div>

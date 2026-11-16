@@ -19,10 +19,27 @@ import { InscribeTransferDemo, inscribeTransferConfig } from './transaction/Insc
 
 // RGB demos
 import { RgbAssetsDemo, rgbAssetsConfig } from './rgb/RgbAssetsDemo';
+import { RgbIssueDemo, rgbIssueConfig } from './rgb/RgbIssueDemo';
 import { RgbReceiveDemo, rgbReceiveConfig } from './rgb/RgbReceiveDemo';
 import { RgbPaymentDemo, rgbPaymentConfig } from './rgb/RgbPaymentDemo';
 import { RgbSellSwapDemo, rgbSellSwapConfig } from './rgb/RgbSellSwapDemo';
 import { RgbBuySwapDemo, rgbBuySwapConfig } from './rgb/RgbBuySwapDemo';
+
+// WebRGB v1 demos
+import {
+  WebRgbConnectionDemo,
+  webRgbConnectionConfig,
+  WebRgbAssetsDemo,
+  webRgbAssetsConfig,
+  WebRgbReceiveDemo,
+  webRgbReceiveConfig,
+  WebRgbSendDemo,
+  webRgbSendConfig,
+  WebRgbTransfersDemo,
+  webRgbTransfersConfig,
+  WebRgbEventsDemo,
+  webRgbEventsConfig,
+} from './webrgb';
 
 // Broadcast demos
 import { PushPsbtDemo, pushPsbtConfig } from './broadcast/PushPsbtDemo';
@@ -61,10 +78,19 @@ export const DEMOS: DemoEntry[] = [
 
   // RGB
   { config: rgbAssetsConfig, component: RgbAssetsDemo },
+  { config: rgbIssueConfig, component: RgbIssueDemo },
   { config: rgbReceiveConfig, component: RgbReceiveDemo },
   { config: rgbPaymentConfig, component: RgbPaymentDemo },
   { config: rgbSellSwapConfig, component: RgbSellSwapDemo },
   { config: rgbBuySwapConfig, component: RgbBuySwapDemo },
+
+  // WebRGB v1
+  { config: webRgbConnectionConfig, component: WebRgbConnectionDemo },
+  { config: webRgbAssetsConfig, component: WebRgbAssetsDemo },
+  { config: webRgbReceiveConfig, component: WebRgbReceiveDemo },
+  { config: webRgbSendConfig, component: WebRgbSendDemo },
+  { config: webRgbTransfersConfig, component: WebRgbTransfersDemo },
+  { config: webRgbEventsConfig, component: WebRgbEventsDemo },
 
   // Broadcast
   { config: pushPsbtConfig, component: PushPsbtDemo },

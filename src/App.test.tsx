@@ -16,7 +16,7 @@ jest.mock('@unisat/wallet-connect-react', () => ({
 test('renders the API explorer in preview mode', () => {
   render(<App />);
 
-  expect(screen.getByText('UniSat Developer Lab')).toBeInTheDocument();
+  expect(screen.getByText('UniSat Wallet Demo')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /connect wallet/i })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Sign Message' })).toBeInTheDocument();
   expect(screen.getByText('Preview mode')).toBeInTheDocument();

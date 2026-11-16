@@ -1,5 +1,5 @@
 {
-  "short_name": "UniSat Demo",
+  "short_name": "UniSat Wallet Demo",
   "name": "UniSat Wallet Demo",
   "icons": [
     {
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "browser",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#171d2a",
+  "background_color": "#f5f7fb"
 }

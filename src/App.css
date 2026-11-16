@@ -21,7 +21,8 @@ button { font: inherit; }
 }
 .brand, .topbar-actions, .account-chip { display: flex; align-items: center; }
 .brand { gap: 11px; }
-.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: #171d2a; color: #fff; font-weight: 800; }
+.brand-mark { width: 34px; height: 34px; overflow: hidden; border-radius: 7px; }
+.brand-mark img { display: block; width: 100%; height: 100%; }
 .brand strong, .brand span { display: block; }
 .brand strong { font-size: 15px; letter-spacing: -.01em; }
 .brand span { margin-top: 2px; color: var(--muted); font-size: 12px; }

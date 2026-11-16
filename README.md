@@ -3,10 +3,6 @@
 A developer-facing DApp for testing UniSat Wallet account access, signing,
 transactions, Bitcoin assets, RGB, and WebRGB APIs.
 
-RGB swap integration examples are documented in
-[`docs/RGB_SWAP_TESTING.md`](./docs/RGB_SWAP_TESTING.md). The demo UI provides
-separate pages for backend-coordinated and pure P2P swap testing.
-
 ## Development
 
 Use Node.js 22.12 or newer and pnpm 10.11.0.

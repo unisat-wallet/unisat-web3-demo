@@ -24,7 +24,11 @@ export const copyToClipboard = (textToCopy: string | number) => {
     textArea.focus();
     textArea.select();
     return new Promise<void>((res, rej) => {
-      document.execCommand("copy") ? res() : rej();
+      if (document.execCommand("copy")) {
+        res();
+      } else {
+        rej(new Error("Unable to copy text to the clipboard"));
+      }
       textArea.remove();
     });
   }

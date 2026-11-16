@@ -130,7 +130,7 @@ function App({
       {contextHolder}
       <header className="app-topbar">
         <div className="brand">
-          <div className="brand-mark"><img src={`${process.env.PUBLIC_URL}/unisat-logo.svg`} alt="" /></div>
+          <div className="brand-mark"><img src={`${import.meta.env.BASE_URL}unisat-logo.svg`} alt="" /></div>
           <div>
             <strong>UniSat Wallet Demo</strong>
             <span>DApp integration playground</span>

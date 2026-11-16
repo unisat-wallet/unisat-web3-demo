@@ -1,15 +1,16 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import App from './App';
 
-jest.mock('@unisat/wallet-connect-react', () => ({
+vi.mock('@unisat/wallet-connect-react', () => ({
   useWallet: () => ({
     account: undefined,
     wallet: undefined,
     isConnecting: false,
     isInitialized: true,
-    connect: jest.fn(),
-    disconnect: jest.fn(),
+    connect: vi.fn(),
+    disconnect: vi.fn(),
   }),
 }));
 
@@ -44,7 +45,7 @@ test('renders WebRGB as its own grouped API menu', () => {
 });
 
 test('scrolls the workspace to the top when selecting another API', () => {
-  const scrollTo = jest.fn();
+  const scrollTo = vi.fn();
   const originalScrollTo = HTMLElement.prototype.scrollTo;
   HTMLElement.prototype.scrollTo = scrollTo;
 

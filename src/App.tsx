@@ -132,8 +132,8 @@ function App({
         <div className="brand">
           <div className="brand-mark"><img src={`${import.meta.env.BASE_URL}unisat-logo.svg`} alt="" /></div>
           <div>
-            <strong>UniSat Wallet Demo</strong>
-            <span>DApp integration playground</span>
+            <strong>UniSat Wallet Integration Demo</strong>
+            <span>dApp integration playground</span>
           </div>
         </div>
 

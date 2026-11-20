@@ -1,6 +1,6 @@
-# UniSat Wallet Demo
+# UniSat Wallet Integration Demo
 
-A developer-facing DApp for testing UniSat Wallet account access, signing,
+A developer-facing dApp for testing UniSat Wallet account access, signing,
 transactions, Bitcoin assets, RGB, and WebRGB APIs.
 
 ## Development

@@ -17,7 +17,7 @@ vi.mock('@unisat/wallet-connect-react', () => ({
 test('renders the API explorer in preview mode', () => {
   render(<App />);
 
-  expect(screen.getByText('UniSat Wallet Demo')).toBeInTheDocument();
+  expect(screen.getByText('UniSat Wallet Integration Demo')).toBeInTheDocument();
   expect(screen.getByRole('button', { name: /connect wallet/i })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Account & Connection' })).toBeInTheDocument();
   expect(screen.getByText('Preview mode')).toBeInTheDocument();

@@ -10,6 +10,7 @@ export const webRgbTransfersConfig: DemoConfig = {
   title: 'Transfers',
   category: 'webrgb',
   apiMethod: 'rgb.listTransfers / getTransferStatus',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/webrgb#transfers',
   description: 'List WebRGB transfers and inspect a specific transfer status.',
 };
 

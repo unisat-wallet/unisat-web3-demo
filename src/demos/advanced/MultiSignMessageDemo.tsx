@@ -10,7 +10,7 @@ export const multiSignMessageConfig: DemoConfig = {
   title: 'Multi Sign Messages',
   category: 'advanced',
   apiMethod: 'unisat.multiSignMessage',
-  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-message.md#multisignmessage',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/sign-message#multisignmessage',
   description: 'Sign multiple messages in a single request with different signature types.',
   walletConnectSupported: false,
 };

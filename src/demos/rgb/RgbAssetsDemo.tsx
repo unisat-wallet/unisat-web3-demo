@@ -19,6 +19,7 @@ export const rgbAssetsConfig: DemoConfig = {
   title: 'RGB Assets',
   category: 'rgb',
   apiMethod: 'unisat.rgb.getAssets',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/rgb#assets',
   description: 'Read the wallet’s local RGB asset balances. This experimental API does not open a wallet approval.',
 };
 

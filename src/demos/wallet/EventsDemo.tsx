@@ -15,7 +15,7 @@ export const walletEventsConfig: DemoConfig = {
   title: 'Wallet Events',
   category: 'wallet',
   apiMethod: 'unisat.on / removeListener',
-  docUrl: 'https://github.com/unisat-wallet/unisat-dev-docs/tree/master/wallet-api/api-docs',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/access-accounts#accountschanged',
   description: 'Subscribe to account and chain changes emitted by UniSat Wallet.',
 };
 

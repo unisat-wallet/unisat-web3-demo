@@ -10,6 +10,7 @@ export const webRgbSendConfig: DemoConfig = {
   title: 'Invoice & Send',
   category: 'webrgb',
   apiMethod: 'rgb.decodeRgbInvoice / sendAsset',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/webrgb#send',
   description: 'Decode an RGB invoice, then prepare, approve and send its asset transfer.',
 };
 

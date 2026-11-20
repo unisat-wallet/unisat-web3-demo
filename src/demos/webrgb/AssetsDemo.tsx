@@ -10,6 +10,7 @@ export const webRgbAssetsConfig: DemoConfig = {
   title: 'Assets',
   category: 'webrgb',
   apiMethod: 'rgb.listAssets / getAssetBalance',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/webrgb#assets',
   description: 'List WebRGB assets or query one asset balance by contract ID.',
 };
 

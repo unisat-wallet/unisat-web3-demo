@@ -13,6 +13,7 @@ export const rgbSellSwapConfig: DemoConfig = {
   title: 'RGB Swap — Backend-Coordinated',
   category: 'rgb',
   apiMethod: 'prepareSwap (v1.8.3+) / signSellSwapAndPublishConsignment (v1.8.3+) / syncSellSwapAck (v1.8.4+)',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/rgb-swap-backend',
   description: 'Test the flow where the backend is the RGB receiver, retains the final transaction, and broadcasts it.',
 };
 

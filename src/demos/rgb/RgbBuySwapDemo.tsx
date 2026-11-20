@@ -24,6 +24,7 @@ export const rgbBuySwapConfig: DemoConfig = {
   title: 'RGB Swap — Pure P2P',
   category: 'rgb',
   apiMethod: 'signBuySwap (v1.8.3+) / signBuySwapCommit (v1.8.4+) / acceptBuySwap (v1.8.3+) / confirmSellSwap (v1.8.3+)',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/rgb-swap-p2p',
   description: 'Test a non-custodial trade where two UniSat wallets sign separate partial PSBTs and the page broadcasts.',
 };
 

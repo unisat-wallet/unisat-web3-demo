@@ -9,7 +9,7 @@ export const sendRunesConfig: DemoConfig = {
   title: 'Send Runes',
   category: 'transaction',
   apiMethod: 'unisat.sendRunes',
-  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/manage-assets.md#sendrunes',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/manage-assets#sendrunes',
   description: 'Transfer Runes tokens to another address.',
   walletConnectSupported: false,
 };

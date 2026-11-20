@@ -18,6 +18,7 @@ export const rgbIssueConfig: DemoConfig = {
   title: 'Issue RGB20',
   category: 'rgb',
   apiMethod: 'unisat.rgb.getIssueAvailability / issueNia',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/rgb#issue-an-nia-asset',
   description: 'Inspect RGB allocation capacity and issue an NIA asset from a wallet-API issuance order.',
 };
 

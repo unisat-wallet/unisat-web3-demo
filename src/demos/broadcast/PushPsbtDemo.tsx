@@ -9,7 +9,7 @@ export const pushPsbtConfig: DemoConfig = {
   title: 'Push PSBT',
   category: 'broadcast',
   apiMethod: 'unisat.pushPsbt',
-  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-transaction.md#pushpsbt',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/sign-transaction#pushpsbt',
   description: 'Broadcast a signed PSBT to the network.',
   walletConnectSupported: false,
 };

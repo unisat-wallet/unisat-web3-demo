@@ -10,6 +10,7 @@ export const webRgbReceiveConfig: DemoConfig = {
   title: 'Receive',
   category: 'webrgb',
   apiMethod: 'rgb.blindReceive / witnessReceive',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/webrgb#receive',
   description: 'Create a blind or witness WebRGB receive invoice.',
 };
 

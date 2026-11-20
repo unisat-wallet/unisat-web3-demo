@@ -10,7 +10,7 @@ export const signPsbtsConfig: DemoConfig = {
   title: 'Sign Multiple PSBTs',
   category: 'signing',
   apiMethod: 'unisat.signPsbts',
-  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-transaction.md#signpsbts',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/sign-transaction#signpsbts',
   description: 'Sign multiple PSBTs in a single request.',
   walletConnectSupported: true,
 };

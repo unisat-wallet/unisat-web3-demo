@@ -10,7 +10,7 @@ export const signMessageConfig: DemoConfig = {
   title: 'Sign Message',
   category: 'signing',
   apiMethod: 'unisat.signMessage',
-  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/sign-message.md#signmessage',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/sign-message#signmessage',
   description: 'Sign a message using ECDSA or BIP-322 signature scheme.',
   walletConnectSupported: true,
 };

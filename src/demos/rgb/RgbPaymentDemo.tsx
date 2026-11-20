@@ -11,6 +11,7 @@ export const rgbPaymentConfig: DemoConfig = {
   title: 'RGB Payment',
   category: 'rgb',
   apiMethod: 'unisat.rgb.preparePayment / signPayment / cancelPayment / getPaymentStatus',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/rgb#normal-rgb-payment',
   description: 'Prepare an RGB payment, approve its signature, then monitor or cancel that exact transfer ID.',
 };
 

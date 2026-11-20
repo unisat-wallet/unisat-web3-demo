@@ -11,7 +11,7 @@ export const walletAccountConfig: DemoConfig = {
   title: 'Account & Connection',
   category: 'wallet',
   apiMethod: 'unisat.requestAccounts / getAccounts / getPublicKey',
-  docUrl: 'https://github.com/unisat-wallet/unisat-dev-docs/blob/master/wallet-api/api-docs/access-accounts.md',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/connect-extension',
   description: 'Connect to UniSat Wallet and inspect the active account and public key.',
 };
 

@@ -18,6 +18,7 @@ export const rgbReceiveConfig: DemoConfig = {
   title: 'RGB Receive',
   category: 'rgb',
   apiMethod: 'unisat.rgb.createReceiveInvoice / getPendingReceives / acceptReceive / rejectReceive',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/rgb#receive-rgb',
   description: 'Create a blind RGB receive invoice, then inspect and accept or reject incoming consignments.',
 };
 

@@ -9,6 +9,7 @@ export const webRgbEventsConfig: DemoConfig = {
   title: 'Transfer Events',
   category: 'webrgb',
   apiMethod: 'rgb.on / off',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/webrgb#events',
   description: 'Subscribe to WebRGB transferReceived and transferSettled events.',
 };
 

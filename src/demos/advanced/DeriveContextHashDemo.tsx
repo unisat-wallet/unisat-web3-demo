@@ -9,7 +9,7 @@ export const deriveContextHashConfig: DemoConfig = {
   title: 'Derive Context Hash',
   category: 'advanced',
   apiMethod: 'unisat.deriveContextHash',
-  docUrl: 'https://github.com/unisat-wallet/wallet/blob/master/docs/api/derive-context-hash.md#derivecontexthash',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/derive-context-hash#derivecontexthash',
   description: 'Experimental: derive a deterministic context hash for the connected account.',
   walletConnectSupported: false,
 };

@@ -9,6 +9,7 @@ export const webRgbConnectionConfig: DemoConfig = {
   title: 'Provider & Connection',
   category: 'webrgb',
   apiMethod: 'rgb.enable / getInfo / getAddress',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/webrgb#connect-and-feature-detect',
   description: 'Discover a WebRGB v1 wallet, connect it and inspect its supported capabilities.',
 };
 

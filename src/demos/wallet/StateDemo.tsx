@@ -13,7 +13,7 @@ export const walletStateConfig: DemoConfig = {
   title: 'Wallet State',
   category: 'wallet',
   apiMethod: 'unisat.getBalanceV2 / getChain / getVersion',
-  docUrl: 'https://github.com/unisat-wallet/unisat-dev-docs/tree/master/wallet-api/api-docs',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/manage-assets#getbalancev2',
   description: 'Read the connected wallet balance, chain and extension version.',
 };
 

@@ -67,6 +67,16 @@ a {
 .demo-result { margin-top: 20px; text-align: left; }
 .demo-result-data { max-height: 200px; margin: 0; overflow: auto; color: #33415e; font-size: 12px; line-height: 1.55; }
 
+.mobile-link-error { margin-top: 18px; }
+.mobile-link-result { display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 22px; margin-top: 22px; padding-top: 22px; border-top: 1px solid #edf0f5; }
+.mobile-link-qr { display: flex; align-items: center; flex-direction: column; gap: 9px; }
+.mobile-link-qr img { display: block; width: min(100%, 220px); height: auto; border: 1px solid #e5e9f2; border-radius: 10px; }
+.mobile-link-qr span { color: #7d89a0; font-size: 11px; line-height: 1.45; text-align: center; }
+.mobile-link-details { min-width: 0; }
+.mobile-link-details .demo-field { margin-top: 0; }
+.mobile-link-details textarea { font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 11px; }
+.mobile-link-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
 .rgb-inline-fields, .rgb-section-actions { display: flex; align-items: end; gap: 10px; flex-wrap: wrap; }
 .rgb-inline-fields label, .rgb-form-grid label { display: grid; gap: 5px; color: #4a5670; font-size: 12px; font-weight: 650; }
 .rgb-inline-fields .ant-input-number { width: 92px; }
@@ -95,4 +105,7 @@ a {
   .rgb-form-grid label:first-child:has(.ant-input-textarea) { grid-column: auto; }
   .rgb-section-actions { align-items: flex-start; flex-direction: column; }
   .message-type-selector .ant-space { margin-top: 8px; }
+  .mobile-link-result { grid-template-columns: 1fr; }
+  .mobile-link-actions { justify-content: stretch; }
+  .mobile-link-actions .ant-btn { flex: 1; }
 }

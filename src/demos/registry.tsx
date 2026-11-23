@@ -14,6 +14,8 @@ import {
   walletStateConfig,
   WalletEventsDemo,
   walletEventsConfig,
+  MobileDappLinkDemo,
+  mobileDappLinkConfig,
 } from './wallet';
 
 // Signing demos
@@ -79,6 +81,7 @@ export const DEMOS: DemoEntry[] = [
   { config: walletAccountConfig, component: WalletAccountDemo },
   { config: walletStateConfig, component: WalletStateDemo },
   { config: walletEventsConfig, component: WalletEventsDemo },
+  { config: mobileDappLinkConfig, component: MobileDappLinkDemo },
 
   // Signing
   { config: signMessageConfig, component: SignMessageDemo },

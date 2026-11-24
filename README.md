@@ -15,6 +15,17 @@ pnpm start
 The Vite development server runs at [http://localhost:5173](http://localhost:5173)
 and reloads the page when source files change.
 
+The WalletConnect demo defaults to the registered UniSat Reown Project ID. To
+test with a separate Reown project, override it when starting or building:
+
+```bash
+VITE_WALLETCONNECT_PROJECT_ID=<project-id> pnpm start
+```
+
+Standard Bitcoin (`bip122`) and RGB (`webrgb:1`) deliberately use independent
+sessions. Scan the generated QR with UniSat Mobile from another device, or use
+the generated `unisat://wc` link when the demo is open on the same phone.
+
 ## Tests
 
 Run the Vitest suite once:

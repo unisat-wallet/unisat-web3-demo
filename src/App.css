@@ -86,6 +86,17 @@ button { font: inherit; }
 .environment-control p { margin: 5px 0 0; color: #7b879b; font-size: 12px; }
 .demo-workspace { margin-top: 20px; }
 
+.walletconnect-project-id { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.walletconnect-project-id code { color: #47536b; }
+.walletconnect-pairing { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 20px; padding: 18px; border: 1px solid #bdcaf5; border-radius: 12px; background: #f7f9ff; }
+.walletconnect-pairing img { width: 280px; max-width: 100%; border-radius: 8px; }
+.walletconnect-pairing .demo-field { margin-top: 12px; }
+.walletconnect-session-block { padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: #fbfcff; }
+.walletconnect-session-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 15px; }
+.walletconnect-session-heading strong, .walletconnect-session-heading span { display: block; }
+.walletconnect-session-heading strong { font-size: 15px; }
+.walletconnect-session-heading span { margin-top: 2px; color: var(--muted); font-size: 11px; }
+
 @media (max-width: 900px) {
   .app-layout { grid-template-columns: 230px minmax(0, 1fr); }
   .workspace { padding: 32px 28px 52px; }
@@ -107,4 +118,6 @@ button { font: inherit; }
   .workspace-intro h2 { font-size: 26px; }
   .connection-hint { display: inline-block; margin-top: 13px; white-space: normal; }
   .environment-panel { padding: 16px; }
+  .walletconnect-pairing { grid-template-columns: 1fr; padding: 14px; }
+  .walletconnect-pairing img { margin: 0 auto; }
 }

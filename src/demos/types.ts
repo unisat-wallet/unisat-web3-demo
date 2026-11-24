@@ -31,6 +31,7 @@ export type DemoCategory =
   | 'transaction'  // Sending BTC, inscriptions, runes
   | 'rgb'          // RGB assets, invoices and payments
   | 'webrgb'       // Wallet-neutral WebRGB v1 provider
+  | 'walletconnect' // Remote standard Bitcoin and RGB sessions
   | 'broadcast'    // Push tx/psbt
   | 'advanced';    // Multi-sign, batch operations
 
@@ -40,6 +41,7 @@ export const CATEGORY_LABELS: Record<DemoCategory, string> = {
   transaction: 'Transactions',
   rgb: 'RGB',
   webrgb: 'WebRGB',
+  walletconnect: 'WalletConnect',
   broadcast: 'Broadcast',
   advanced: 'Advanced',
 };
@@ -50,6 +52,7 @@ export const CATEGORY_ORDER: DemoCategory[] = [
   'transaction',
   'rgb',
   'webrgb',
+  'walletconnect',
   'broadcast',
   'advanced',
 ];

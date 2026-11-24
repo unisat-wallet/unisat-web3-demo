@@ -19,6 +19,7 @@ const CATEGORY_DESCRIPTIONS: Record<DemoCategory, string> = {
   transaction: 'Bitcoin & assets',
   rgb: 'Experimental assets',
   webrgb: 'WebRGB v1 interfaces',
+  walletconnect: 'Remote wallet sessions',
   broadcast: 'Publish to network',
   advanced: 'Power-user tools',
 };

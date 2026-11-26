@@ -23,8 +23,9 @@ VITE_WALLETCONNECT_PROJECT_ID=<project-id> pnpm start
 ```
 
 Standard Bitcoin (`bip122`) and RGB (`webrgb:1`) deliberately use independent
-sessions. Scan the generated QR with UniSat Mobile from another device, or use
-the generated `unisat://wc` link when the demo is open on the same phone.
+sessions. Both WalletConnect modes require UniSat Mobile v1.8.6 or later. Scan
+the generated QR with UniSat Mobile from another device, or use the generated
+`unisat://wc` link when the demo is open on the same phone.
 
 ## Tests
 

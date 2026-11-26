@@ -84,7 +84,7 @@ export const bitcoinWalletConnectConfig: DemoConfig = {
   title: 'WalletConnect — Bitcoin',
   category: 'mobile',
   apiMethod: 'WalletConnect v2 / bip122',
-  description: 'Connect and test a standard Bitcoin WalletConnect session with UniSat Mobile.',
+  description: 'Connect and test a standard Bitcoin WalletConnect session with UniSat Mobile v1.8.6 or later.',
 };
 
 export const rgbWalletConnectConfig: DemoConfig = {
@@ -92,7 +92,7 @@ export const rgbWalletConnectConfig: DemoConfig = {
   title: 'WalletConnect — RGB',
   category: 'mobile',
   apiMethod: 'WalletConnect v2 / webrgb:1',
-  description: 'Connect and test an independent WebRGB WalletConnect session with UniSat Mobile.',
+  description: 'Connect and test an independent WebRGB WalletConnect session with UniSat Mobile v1.8.6 or later.',
 };
 
 type WalletConnectDemoProps = {
@@ -307,7 +307,9 @@ function WalletConnectDemo({ mode }: WalletConnectDemoProps) {
       <Alert
         type="info"
         showIcon
-        message={mode === 'bitcoin' ? 'Standard Bitcoin WalletConnect session' : 'Independent RGB WalletConnect session'}
+        message={mode === 'bitcoin'
+          ? 'Standard Bitcoin WalletConnect session — requires UniSat Mobile v1.8.6+'
+          : 'Independent RGB WalletConnect session — requires UniSat Mobile v1.8.6+'}
         description={mode === 'bitcoin'
           ? 'This demo uses the bip122 namespace. Its session can remain connected while a separate RGB session is active.'
           : 'This demo uses the webrgb:1 profile and does not reuse the Bitcoin session. Scan the raw QR on a second device or use the UniSat deep link on the same phone.'}

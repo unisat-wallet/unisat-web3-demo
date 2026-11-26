@@ -51,7 +51,7 @@ export function DemoCard({ config, result, children, extra }: DemoCardProps) {
               </Tooltip>
             </span>
           )}
-          {config.docUrl && <a href={config.docUrl} target="_blank" rel="noopener noreferrer">Open API docs ↗</a>}
+          {config.docUrl && <a href={config.docUrl} target="_blank" rel="noopener noreferrer">Wallet API docs ↗</a>}
         </div>
       )}
 

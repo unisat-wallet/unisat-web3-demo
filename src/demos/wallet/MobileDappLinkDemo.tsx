@@ -9,9 +9,10 @@ const UNISAT_MOBILE_REQUEST_URL = 'https://app.unisat.cloud/request';
 
 export const mobileDappLinkConfig: DemoConfig = {
   key: 'mobileDappLink',
-  title: 'Mobile DApp Link',
-  category: 'wallet',
+  title: 'Open dApp in UniSat Mobile',
+  category: 'mobile',
   apiMethod: 'openDapp Universal Link',
+  docUrl: 'https://api-docs.unisat.io/docs/wallet-api/mobile-integration',
   description: 'Generate an Open in UniSat link and QR code for an HTTPS dApp URL.',
   walletConnectSupported: false,
 };

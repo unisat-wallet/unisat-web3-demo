@@ -32,6 +32,18 @@ test('renders wallet read APIs as a dedicated menu group', () => {
   expect(screen.getByRole('button', { name: /^Wallet Events/ })).toBeInTheDocument();
 });
 
+test('groups UniSat Mobile entry points together after wallet APIs', () => {
+  render(<App />);
+
+  const walletGroup = screen.getByRole('button', { name: 'Open Wallet APIs' });
+  const mobileGroup = screen.getByRole('button', { name: 'Open Mobile Integration APIs' });
+
+  expect(walletGroup.compareDocumentPosition(mobileGroup) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(screen.getByRole('button', { name: /Open dApp in UniSat Mobile/ })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /WalletConnect — Bitcoin/ })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /WalletConnect — RGB/ })).toBeInTheDocument();
+});
+
 test('renders WebRGB as its own grouped API menu', () => {
   render(<App />);
 

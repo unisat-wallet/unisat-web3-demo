@@ -18,6 +18,14 @@ import {
   mobileDappLinkConfig,
 } from './wallet';
 
+// UniSat Mobile integration demos
+import {
+  BitcoinWalletConnectDemo,
+  bitcoinWalletConnectConfig,
+  RgbWalletConnectDemo,
+  rgbWalletConnectConfig,
+} from './walletconnect';
+
 // Signing demos
 import { SignMessageDemo, signMessageConfig } from './signing/SignMessageDemo';
 import { SignPsbtDemo, signPsbtConfig } from './signing/SignPsbtDemo';
@@ -53,13 +61,6 @@ import {
   webRgbEventsConfig,
 } from './webrgb';
 
-import {
-  BitcoinWalletConnectDemo,
-  bitcoinWalletConnectConfig,
-  RgbWalletConnectDemo,
-  rgbWalletConnectConfig,
-} from './walletconnect';
-
 // Broadcast demos
 import { PushPsbtDemo, pushPsbtConfig } from './broadcast/PushPsbtDemo';
 import { PushTxDemo, pushTxConfig } from './broadcast/PushTxDemo';
@@ -88,7 +89,11 @@ export const DEMOS: DemoEntry[] = [
   { config: walletAccountConfig, component: WalletAccountDemo },
   { config: walletStateConfig, component: WalletStateDemo },
   { config: walletEventsConfig, component: WalletEventsDemo },
+
+  // Mobile Integration
   { config: mobileDappLinkConfig, component: MobileDappLinkDemo },
+  { config: bitcoinWalletConnectConfig, component: BitcoinWalletConnectDemo },
+  { config: rgbWalletConnectConfig, component: RgbWalletConnectDemo },
 
   // Signing
   { config: signMessageConfig, component: SignMessageDemo },
@@ -116,10 +121,6 @@ export const DEMOS: DemoEntry[] = [
   { config: webRgbSendConfig, component: WebRgbSendDemo },
   { config: webRgbTransfersConfig, component: WebRgbTransfersDemo },
   { config: webRgbEventsConfig, component: WebRgbEventsDemo },
-
-  // WalletConnect v2
-  { config: bitcoinWalletConnectConfig, component: BitcoinWalletConnectDemo },
-  { config: rgbWalletConnectConfig, component: RgbWalletConnectDemo },
 
   // Broadcast
   { config: pushPsbtConfig, component: PushPsbtDemo },

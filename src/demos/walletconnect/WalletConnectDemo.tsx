@@ -81,16 +81,16 @@ function parseObject(value: string) {
 
 export const bitcoinWalletConnectConfig: DemoConfig = {
   key: 'bitcoinWalletConnect',
-  title: 'Bitcoin Session',
-  category: 'walletconnect',
+  title: 'WalletConnect — Bitcoin',
+  category: 'mobile',
   apiMethod: 'WalletConnect v2 / bip122',
   description: 'Connect and test a standard Bitcoin WalletConnect session with UniSat Mobile.',
 };
 
 export const rgbWalletConnectConfig: DemoConfig = {
   key: 'rgbWalletConnect',
-  title: 'RGB Session',
-  category: 'walletconnect',
+  title: 'WalletConnect — RGB',
+  category: 'mobile',
   apiMethod: 'WalletConnect v2 / webrgb:1',
   description: 'Connect and test an independent WebRGB WalletConnect session with UniSat Mobile.',
 };

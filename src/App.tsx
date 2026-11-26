@@ -15,11 +15,11 @@ type AppProps = {
 
 const CATEGORY_DESCRIPTIONS: Record<DemoCategory, string> = {
   wallet: 'Connection & state',
+  mobile: 'Deep links & remote sessions',
   signing: 'Messages & PSBTs',
   transaction: 'Bitcoin & assets',
   rgb: 'Experimental assets',
   webrgb: 'WebRGB v1 interfaces',
-  walletconnect: 'Remote wallet sessions',
   broadcast: 'Publish to network',
   advanced: 'Power-user tools',
 };

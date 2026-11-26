@@ -21,38 +21,38 @@ export interface DemoConfig {
   description?: string;
   /** API method name (e.g., "unisat.signMessage") */
   apiMethod?: string;
-  /** Whether this demo requires wallet-connect (vs unisat-specific) */
+  /** Whether this method can also be called through a WalletConnect session */
   walletConnectSupported?: boolean;
 }
 
 export type DemoCategory =
   | 'wallet'       // Connection, account and wallet state
+  | 'mobile'       // UniSat Mobile deep links and WalletConnect sessions
   | 'signing'      // Message and PSBT signing
   | 'transaction'  // Sending BTC, inscriptions, runes
   | 'rgb'          // RGB assets, invoices and payments
   | 'webrgb'       // Wallet-neutral WebRGB v1 provider
-  | 'walletconnect' // Remote standard Bitcoin and RGB sessions
   | 'broadcast'    // Push tx/psbt
   | 'advanced';    // Multi-sign, batch operations
 
 export const CATEGORY_LABELS: Record<DemoCategory, string> = {
   wallet: 'Wallet',
+  mobile: 'Mobile Integration',
   signing: 'Signing',
   transaction: 'Transactions',
   rgb: 'RGB',
   webrgb: 'WebRGB',
-  walletconnect: 'WalletConnect',
   broadcast: 'Broadcast',
   advanced: 'Advanced',
 };
 
 export const CATEGORY_ORDER: DemoCategory[] = [
   'wallet',
+  'mobile',
   'signing',
   'transaction',
   'rgb',
   'webrgb',
-  'walletconnect',
   'broadcast',
   'advanced',
 ];
